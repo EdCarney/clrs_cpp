@@ -51,20 +51,18 @@ void merge_sort_internal(int arr[], int p, int q) {
 void merge_combine(int arr[], int p, int r, int q) {
 	int size_L = r - p + 1;
 	int size_R = q - r;
-	int *L = new int[size_L + 1]();
-	int *R = new int[size_R + 1]();
+	int *L = new int[size_L]();
+	int *R = new int[size_R]();
 	for (int i = 0; i < size_L; i++) {
 		L[i] = arr[p + i];
 	}
 	for (int i = 0; i < size_R; i++) {
 		R[i] = arr[r + 1 + i];
 	}
-	L[size_L] = 99999;
-	R[size_R] = 99999;
 	int size = q - p + 1;
 	int i = 0, j = 0, k = 0;
 	while (k < size) {
-		if (L[i] < R[j]) {
+		if (j >= size_R || (i < size_L && L[i] < R[j])) {
 			arr[p + k++] = L[i++];
 		} else {
 			arr[p + k++] = R[j++];
