@@ -14,7 +14,7 @@ void print_array(int arr[], int size) {
 }
 
 int main() {
-	int arr[] = {3, 2, 9, 1, 0, 0, 2, 3};
+	int arr[] = {3, 2, 82, 1, 10, 16, -19, -22, 1, 2, 20, 9, -1, 0, 100, 2, 3, 99, 1, -15};
 	int size = sizeof(arr) / sizeof(arr[0]);
 
 	printf("Initial Array:\n");
