@@ -4,6 +4,9 @@ void merge_sort_internal(int[], int, int);
 void merge_combine(int[], int, int, int);
 
 void merge_sort_internal(int arr[], int p, int q) {
+	if (p >= q)
+		return;
+
 	int r = (p + q) / 2;
 	merge_sort_internal(arr, p, r);
 	merge_sort_internal(arr, r + 1, q);
@@ -67,6 +70,7 @@ void sorting::selection_sort(int arr[], int size) {
 	}
 }
 
+// Sorts the provided array using merge sort
 void sorting::merge_sort(int arr[], int size) {
 	merge_sort_internal(arr, 0, size - 1);
 }
