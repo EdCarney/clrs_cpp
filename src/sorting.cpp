@@ -38,6 +38,8 @@ void merge_combine(int arr[], int p, int r, int q) {
 			arr[p + k++] = R[j++];
 		}
 	}
+	delete[] L;
+	delete[] R;
 }
 
 // Sorts the provided array using insertion sort
