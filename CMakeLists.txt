@@ -16,6 +16,7 @@ target_link_libraries(algo_test PRIVATE sorting_lib)
 add_subdirectory(googletest)
 add_subdirectory(test)
 
+set(CMAKE_CXX_STANDARD 17)
 set(Headers
 	)
 set(Sources
