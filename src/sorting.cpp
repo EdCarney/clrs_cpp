@@ -33,6 +33,18 @@ void sorting::selection_sort(int arr[], int size) {
 	}
 }
 
+void sorting::bubble_sort(int arr[], int size) {
+	for (int i = 0; i < size - 1; i++) {
+		for (int j = size - 1; j > i; j--) {
+			if (arr[j - 1] > arr[j]) {
+				int temp = arr[j];
+				arr[j] = arr[j - 1];
+				arr[j - 1] = temp;
+			}
+		}
+	}
+}
+
 // Sorts the provided array using merge sort
 void sorting::merge_sort(int arr[], int size) {
 	merge_sort_internal(arr, 0, size - 1);
