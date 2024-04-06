@@ -41,7 +41,24 @@ namespace arrays {
 	// Uses an O(n) linear one-pass approach.
 	// Returns a tuple of (max, start_index, end_index)
 	array_def max_subarray_singlepass(int arr[], int size) {
-		return std::make_tuple(0, 0, 0);
+		int max_sum = constants::INT_MIN;
+		int current_sum = 0;
+		int high = -1, low = -1;
+		int current_high = 0, current_low = 0;
+		for (int i = 0; i < size; i++) {
+			current_high = i;
+			current_sum += arr[current_high];
+			if (current_sum > max_sum) {
+				max_sum = current_sum;
+				high = current_high;
+				low = current_low;
+			}
+			if (current_sum < 0) {
+				current_sum = 0;
+				current_low = current_high + 1;
+			}
+		}
+		return std::make_tuple(max_sum, low, high);
 	}
 }
 
