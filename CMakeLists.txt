@@ -17,6 +17,12 @@ add_library(
 	src/arrays.cpp
 	)
 
+add_library(
+	matrices_lib
+	src/matrices.hpp
+	src/matrices.cpp
+	)
+
 add_executable(algo_test src/main.cpp)
 
 target_link_libraries(algo_test PRIVATE sorting_lib arrays_lib)
