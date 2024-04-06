@@ -1,10 +1,28 @@
 #include "matrices.hpp"
 #include <vector>
 
+using namespace std;
+
 namespace matrices {
 
-	matrix_2d multiply_square(matrix_2d A, matrix_2d B) {
-		std::vector<std::vector<int>> result
-		return result;
+	matrix_2d multiply_square_bruteforce(matrix_2d A, matrix_2d B) {
+		// we assume A and B are square
+		int n = A.size();
+		
+		// populate matrix to be returned
+		matrix_2d C = vector<vector<int>>(n);
+		for (int i = 0; i < n; i++) {
+			C[i] = vector<int>(n);
+		}
+
+		for (int i = 0; i < n; i++) {
+			for (int j = 0; j < n; j++) {
+				for (int k = 0; k < n; k++) {
+					C[i][j] += A[i][k] * B[k][j];
+				}
+			}
+		}
+
+		return C;
 	}
 }
