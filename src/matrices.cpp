@@ -25,4 +25,14 @@ namespace matrices {
 
 		return C;
 	}
+
+	matrix_2d multiply_square_dnc(matrix_2d A, matrix_2d B) {
+		matrix_2d value = vector<vector<int>>();
+		return value;
+	}
+
+	matrix_2d multiply_square_strassen(matrix_2d A, matrix_2d B) {
+		matrix_2d value = vector<vector<int>>();
+		return value;
+	}
 }
