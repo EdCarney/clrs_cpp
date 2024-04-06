@@ -1,6 +1,8 @@
 cmake_minimum_required(VERSION 3.23)
 project(Algorithms VERSION 1.0.0)
 
+set(CMAKE_CXX_STANDARD 17)
+
 enable_testing()
 
 add_library(
@@ -9,14 +11,19 @@ add_library(
 	src/sorting.cpp
 	)
 
+add_library(
+	arrays_lib
+	src/arrays.hpp
+	src/arrays.cpp
+	)
+
 add_executable(algo_test src/main.cpp)
 
-target_link_libraries(algo_test PRIVATE sorting_lib)
+target_link_libraries(algo_test PRIVATE sorting_lib arrays_lib)
 
 add_subdirectory(googletest)
 add_subdirectory(test)
 
-set(CMAKE_CXX_STANDARD 17)
 set(Headers
 	)
 set(Sources
