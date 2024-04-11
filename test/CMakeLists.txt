@@ -6,6 +6,7 @@ set(Sources
 	sorting_tests.cpp
 	arrays_tests.cpp
 	matrices_tests.cpp
+    heaps_tests.cpp
 )
 
 add_executable(${This} ${Sources})
@@ -14,6 +15,7 @@ target_link_libraries(${This} PUBLIC
 	sorting_lib
 	arrays_lib
 	matrices_lib
+    heaps_lib
 )
 
 add_test(

@@ -23,14 +23,18 @@ add_library(
 	src/matrices.cpp
 	)
 
-add_executable(algo_test src/main.cpp)
+add_library(
+	heaps_lib
+	src/heaps.hpp
+	src/heaps.cpp
+	)
 
-target_link_libraries(algo_test PRIVATE sorting_lib arrays_lib)
+set(LIBRARIES
+    sorting_lib
+    arrays_lib
+    matrices_lib
+    heaps_lib
+    )
 
 add_subdirectory(googletest)
 add_subdirectory(test)
-
-set(Headers
-	)
-set(Sources
-	)
