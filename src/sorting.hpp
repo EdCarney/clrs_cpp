@@ -1,5 +1,5 @@
-#ifndef SORTING_HPP_INCLUDED
-#define SORTING_HPP_INCLUDED
+#ifndef SORTING_HEADER_HPP
+#define SORTING_HEADER_HPP
 
 namespace sorting {
 
@@ -13,4 +13,4 @@ namespace sorting {
 
 }
 
-#endif // SORTING_HPP_INCLUDED
+#endif // SORTING_HEADER_HPP

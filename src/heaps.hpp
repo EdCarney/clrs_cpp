@@ -33,4 +33,4 @@ namespace heaps {
     void heap_sort(std::vector<int> &vec);
 }
 
-#endif // HEAPD_HEADER_HPP
+#endif // HEAPS_HEADER_HPP

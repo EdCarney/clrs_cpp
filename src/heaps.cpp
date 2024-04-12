@@ -57,11 +57,10 @@ namespace heaps {
         Heap heap = Heap(vec);
         build_max_heap(heap);
         while (heap.heap_size > 0) {
-            int max_heap_index = heap.heap_size - 1;
+            int max_heap_index = --heap.heap_size;
             int temp = heap[max_heap_index];
             heap[max_heap_index] = heap[0];
             heap[0] = temp;
-            heap.heap_size -= 1;
             max_heapify(heap, 0);
         }
     }
