@@ -4,12 +4,6 @@
 
 namespace heaps {
 
-    Heap::Heap(std::vector<int> &vec) {
-        array = vec;
-        heap_size = array.size();
-        length = array.size();
-    }
-
     int Heap::left_child(int i) {
         return i * 2 + 1;
     }
@@ -52,7 +46,7 @@ namespace heaps {
     }
 
     void build_max_heap(Heap &heap) {
-        int leaf_end = heap.length / 2;
+        int leaf_end = heap.heap_size;//(heap.length / 2) + 1;
 
         while (leaf_end >= 0) {
             max_heapify(heap, leaf_end--);
@@ -62,13 +56,13 @@ namespace heaps {
     void heap_sort(std::vector<int> &vec) {
         Heap heap = Heap(vec);
         build_max_heap(heap);
-        while (heap.heap_size > 1) {
+        while (heap.heap_size > 0) {
             int max_heap_index = heap.heap_size - 1;
             int temp = heap[max_heap_index];
             heap[max_heap_index] = heap[0];
-            heap[0] = heap[max_heap_index];
+            heap[0] = temp;
+            heap.heap_size -= 1;
             max_heapify(heap, 0);
-            --heap.heap_size;
         }
     }
 }

@@ -1,9 +1,9 @@
 #include "../src/heaps.hpp"
-#include <gtest/gtest.h>
-#include <cstdio>
+#include "utilities.hpp"
+#include <map>
 #include <vector>
-#include <tuple>
-#include <limits>
+
+const int NUM_ARRAYS = 100;
 
 TEST(HeapsBase, InitHeapZeroElementVector) {
     std::vector<int> vec { };
@@ -95,3 +95,30 @@ TEST(HeapsBase, BuildMaxHeapMultiElementHeap) {
 	EXPECT_EQ(heap.length, vec.size());
 }
 
+TEST(HeapSortTests, ZeroElementArray) {
+    std::vector<int> vec { };
+    heaps::heap_sort(vec);
+	expect_vector_fwd_sorted(vec);
+}
+
+TEST(HeapSortTests, SingleElementArray) {
+    std::vector<int> vec { 1 };
+    heaps::heap_sort(vec);
+	expect_vector_fwd_sorted(vec);
+}
+
+TEST(HeapSortTests, MultipleElementArrays) {
+	srand(time(NULL));
+	std::unordered_map<int, int> vec_map_original;
+	std::unordered_map<int, int> vec_map_sorted;
+	for (int i = 0; i < NUM_ARRAYS; i++) {
+        std::vector<int> vec = generate_random_vector();
+
+		populate_vector_map(vec_map_original, vec);
+        heaps::heap_sort(vec);
+		populate_vector_map(vec_map_sorted, vec);
+
+		expect_vector_fwd_sorted(vec);
+		expect_maps_equal(vec_map_original, vec_map_sorted);
+	}
+}

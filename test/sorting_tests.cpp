@@ -1,56 +1,9 @@
 #include "../src/sorting.hpp"
-#include <gtest/gtest.h>
-#include <cstdlib>
-#include <tuple>
+#include "utilities.hpp"
 #include <map>
+#include <tuple>
 
-const int MAX_ARRAY_SIZE = 100;
 const int NUM_ARRAYS = 100;
-const int MIN_MAX_ARRAY_ELEMENT = 1000;
-
-void expect_array_fwd_sorted(int arr[], int size) {
-	for (int i = 1; i < size; i++) {
-		const bool expr = arr[i - 1] <= arr[i];
-		EXPECT_TRUE(expr);
-	}
-}
-
-void expect_maps_equal(std::unordered_map<int, int> arr_map_1, std::unordered_map<int, int> arr_map_2) {
-	for (auto const& kvp: arr_map_1) {
-	    int key = kvp.first;
-	    int val = kvp.second;
-	    EXPECT_TRUE(val == arr_map_2[key]);
-	}
-	for (auto const& kvp: arr_map_2) {
-	    int key = kvp.first;
-	    int val = kvp.second;
-	    EXPECT_TRUE(val == arr_map_1[key]);
-	}
-}
-
-std::tuple<int*, int> generate_random_array() {
-	int size = rand() % MAX_ARRAY_SIZE + 1;
-	int *arr = new int[size]();
-       	for (int i = 0; i < size; i++) {
-		arr[i] = rand() % MIN_MAX_ARRAY_ELEMENT;
-
-		// randomly negate some elements
-		bool make_negative = rand() % 3;
-		if (make_negative == 0)
-			arr[i] *= -1;
-	}
-	return std::make_tuple(arr, size);
-}
-
-void populate_array_map(std::unordered_map<int, int> arr_map, int arr[], int size) {
-	for (int i = 0; i < size; i++) {
-		int element = arr[i];
-		if (arr_map.find(element) == arr_map.end()) {
-			arr_map[element] = 0;
-		}
-		arr_map[element]++;
-	}
-}
 
 TEST(InsertionSortTests, ZeroElementArray) {
 	int arr[] = { };

@@ -7,6 +7,7 @@ set(Sources
 	arrays_tests.cpp
 	matrices_tests.cpp
     heaps_tests.cpp
+    utilities.cpp
 )
 
 add_executable(${This} ${Sources})
