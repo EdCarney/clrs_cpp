@@ -19,14 +19,14 @@ namespace heaps {
             int& operator[](unsigned int i);
             const int& operator[](unsigned int i) const;
 
-            Heap(std::vector<int> vec);
+            Heap(std::vector<int> &vec);
     };
 
-    void max_heapify(Heap heap, int i);
+    void max_heapify(Heap &heap, int i);
 
-    void build_max_heap(Heap heap);
+    void build_max_heap(Heap &heap);
 
-    void heap_sort(std::vector<int> vec);
+    void heap_sort(std::vector<int> &vec);
 }
 
 #endif // HEAPD_HEADER_HPP

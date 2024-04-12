@@ -1,12 +1,13 @@
 #include "heaps.hpp"
+#include <cstdio>
 #include <vector>
 
 namespace heaps {
 
-    Heap::Heap(std::vector<int> vec) {
+    Heap::Heap(std::vector<int> &vec) {
+        array = vec;
         heap_size = array.size();
         length = array.size();
-        array = std::vector(vec);
     }
 
     int Heap::left_child(int i) {
@@ -29,17 +30,17 @@ namespace heaps {
         return array[i];
     }
 
-    void max_heapify(Heap heap, int i) {
+    void max_heapify(Heap &heap, int i) {
         // assume children are proper max heaps
         int max_child_index = i;
-        int left_child_index = heap.left_child(i);
-        int right_child_index = heap.right_child(i);
+        int l_child_index = heap.left_child(i);
+        int r_child_index = heap.right_child(i);
 
-        if (left_child_index < heap.heap_size && heap[left_child_index] > heap[max_child_index]) {
-            max_child_index = left_child_index;
+        if (l_child_index < heap.heap_size && heap[l_child_index] > heap[max_child_index]) {
+            max_child_index = l_child_index;
         }
-        if (right_child_index < heap.heap_size && heap[right_child_index] > heap[max_child_index]) {
-            max_child_index = right_child_index;
+        if (r_child_index < heap.heap_size && heap[r_child_index] > heap[max_child_index]) {
+            max_child_index = r_child_index;
         }
 
         if (max_child_index != i) {
@@ -50,7 +51,7 @@ namespace heaps {
         }
     }
 
-    void build_max_heap(Heap heap) {
+    void build_max_heap(Heap &heap) {
         int leaf_end = heap.length / 2;
 
         while (leaf_end >= 0) {
@@ -58,7 +59,7 @@ namespace heaps {
         }
     }
 
-    void heap_sort(std::vector<int> vec) {
+    void heap_sort(std::vector<int> &vec) {
         Heap heap = Heap(vec);
         build_max_heap(heap);
         while (heap.heap_size > 1) {
