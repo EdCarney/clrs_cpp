@@ -2,6 +2,13 @@
 Implmentation of algorithms from CLRS 3rd edition in C++. CMake is used to build, [googletest](https://github.com/google/googletest) is used for testing.
 CMake will output compile commands by default (verified functionality with clangd LSP).
 
+# Cloning
+The googletest submodule is required for building. Use the following command to include the googletest when cloning:
+
+```
+git clone --recurse-submodules <REPO_URL>
+```
+
 # Building
 This repo uses cmake to build. Execute the following from the repo parent directory:
 
