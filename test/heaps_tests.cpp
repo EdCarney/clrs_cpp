@@ -11,7 +11,6 @@ TEST(HeapsBase, InitHeapZeroElementVector) {
     heaps::Heap heap = heaps::Heap(vec);
 	
 	EXPECT_EQ(heap.size, 0);
-	EXPECT_EQ(heap.array_length, 0);
 }
 
 TEST(HeapsBase, InitHeapSingleElementVector) {
@@ -20,7 +19,6 @@ TEST(HeapsBase, InitHeapSingleElementVector) {
     heaps::Heap heap = heaps::Heap(vec);
 	
 	EXPECT_EQ(heap.size, 1);
-	EXPECT_EQ(heap.array_length, 1);
 }
 
 TEST(HeapsBase, InitHeapMultiElementVector) {
@@ -29,7 +27,6 @@ TEST(HeapsBase, InitHeapMultiElementVector) {
     heaps::Heap heap = heaps::Heap(vec);
 	
 	EXPECT_EQ(heap.size, vec.size());
-	EXPECT_EQ(heap.array_length, vec.size());
 }
 
 TEST(HeapsBase, MaxHeapifyZeroElementHeap) {
@@ -39,7 +36,6 @@ TEST(HeapsBase, MaxHeapifyZeroElementHeap) {
     heaps::max_heapify(heap, 0);
 
 	EXPECT_EQ(heap.size, vec.size());
-	EXPECT_EQ(heap.array_length, vec.size());
 }
 
 TEST(HeapsBase, MaxHeapifySingleElementHeap) {
@@ -49,7 +45,6 @@ TEST(HeapsBase, MaxHeapifySingleElementHeap) {
     heaps::max_heapify(heap, 0);
 
 	EXPECT_EQ(heap.size, vec.size());
-	EXPECT_EQ(heap.array_length, vec.size());
 }
 
 TEST(HeapsBase, MaxHeapifyMultiElementHeap) {
@@ -60,7 +55,6 @@ TEST(HeapsBase, MaxHeapifyMultiElementHeap) {
 
 	EXPECT_EQ(3, heap[0]);
 	EXPECT_EQ(heap.size, vec.size());
-	EXPECT_EQ(heap.array_length, vec.size());
 }
 
 TEST(HeapsBase, BuildMaxHeapZeroElementHeap) {
@@ -71,7 +65,6 @@ TEST(HeapsBase, BuildMaxHeapZeroElementHeap) {
     heaps::build_max_heap(heap);
 
 	EXPECT_EQ(heap.size, vec.size());
-	EXPECT_EQ(heap.array_length, vec.size());
 }
 
 TEST(HeapsBase, BuildMaxHeapSingleElementHeap) {
@@ -81,7 +74,6 @@ TEST(HeapsBase, BuildMaxHeapSingleElementHeap) {
     heaps::build_max_heap(heap);
 
 	EXPECT_EQ(heap.size, vec.size());
-	EXPECT_EQ(heap.array_length, vec.size());
 }
 
 TEST(HeapsBase, BuildMaxHeapMultiElementHeap) {
@@ -92,7 +84,6 @@ TEST(HeapsBase, BuildMaxHeapMultiElementHeap) {
 
 	EXPECT_EQ(4, heap[0]);
 	EXPECT_EQ(heap.size, vec.size());
-	EXPECT_EQ(heap.array_length, vec.size());
 }
 
 TEST(HeapSortTests, ZeroElementArray) {

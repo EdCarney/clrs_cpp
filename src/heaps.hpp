@@ -8,7 +8,6 @@ namespace heaps {
     class HeapBase {
         public:
             int size;
-            int array_length;
             std::vector<int> &elements;
 
             int left_child(int i);
@@ -21,20 +20,29 @@ namespace heaps {
             HeapBase(std::vector<int> &vec) : elements(vec) {
                 elements = vec;
                 size = elements.size();
-                array_length = elements.size();
             }
     };
 
     class Heap : public HeapBase {
-
         public:
             Heap(std::vector<int> &vec) : HeapBase(vec) {
             }
     };
 
-    void max_heapify(Heap &heap, int i);
+    class MaxPriorityQueue : public HeapBase {
+        public:
+            int max();
+            int extract_max();
+            void insert(int key);
+            void increase_key(int i, int key_value);
 
-    void build_max_heap(Heap &heap);
+            MaxPriorityQueue(std::vector<int> &vec) : HeapBase(vec) {
+            }
+    };
+
+    void max_heapify(HeapBase &heap, int i);
+
+    void build_max_heap(HeapBase &heap);
 
     void heap_sort(std::vector<int> &vec);
 }

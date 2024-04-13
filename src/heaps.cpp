@@ -24,7 +24,33 @@ namespace heaps {
         return elements[i];
     }
 
-    void max_heapify(Heap &heap, int i) {
+    int MaxPriorityQueue::max() {
+        return elements[0];
+    }
+
+    int MaxPriorityQueue::extract_max() {
+        int max = this->max();
+        elements[0] = elements[--size];
+        max_heapify(*this, 0);
+        return max;
+    }
+
+    void MaxPriorityQueue::insert(int key) {
+        elements.push_back(INT_MIN);
+        increase_key(size++, key);
+    }
+
+    void MaxPriorityQueue::increase_key(int i, int key) {
+        elements[i] = key;
+        while (parent(i) >= 0 && elements[parent(i)] < key) {
+            int temp = elements[parent(i)];
+            elements[parent(i)] = key;
+            elements[i] = temp;
+            i = parent(i);
+        }
+    }
+
+    void max_heapify(HeapBase &heap, int i) {
         // assume children are proper max heaps
         int max_child_index = i;
         int l_child_index = heap.left_child(i);
@@ -45,7 +71,7 @@ namespace heaps {
         }
     }
 
-    void build_max_heap(Heap &heap) {
+    void build_max_heap(HeapBase &heap) {
         int leaf_end = heap.size;
 
         while (leaf_end >= 0) {
