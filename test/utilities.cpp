@@ -34,6 +34,13 @@ void expect_maps_equal(std::unordered_map<int, int> arr_map_1, std::unordered_ma
 	}
 }
 
+void expect_vectors_equal(std::vector<int> vec_1, std::vector<int> vec_2) {
+    EXPECT_EQ(vec_1.size(), vec_2.size());
+    for (int i = 0; i < vec_1.size(); i++) {
+        EXPECT_EQ(vec_1[i], vec_2[i]);
+    }
+}
+
 std::tuple<int*, int> generate_random_array() {
 	int size = rand() % MAX_ARRAY_SIZE + 1;
 	int *arr = new int[size]();
