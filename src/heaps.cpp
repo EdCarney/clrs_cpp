@@ -46,7 +46,7 @@ namespace heaps {
     }
 
     void build_max_heap(Heap &heap) {
-        int leaf_end = heap.heap_size;//(heap.length / 2) + 1;
+        int leaf_end = heap.heap_size;
 
         while (leaf_end >= 0) {
             max_heapify(heap, leaf_end--);
