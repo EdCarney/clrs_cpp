@@ -5,12 +5,11 @@
 
 namespace heaps {
 
-    class Heap {
-
+    class HeapBase {
         public:
-            int heap_size;
-            int length;
-            std::vector<int> &array;
+            int size;
+            int array_length;
+            std::vector<int> &elements;
 
             int left_child(int i);
             int right_child(int i);
@@ -19,10 +18,17 @@ namespace heaps {
             int& operator[](unsigned int i);
             const int& operator[](unsigned int i) const;
 
-            Heap(std::vector<int> &vec) : array(vec) {
-                array = vec;
-                heap_size = array.size();
-                length = array.size();
+            HeapBase(std::vector<int> &vec) : elements(vec) {
+                elements = vec;
+                size = elements.size();
+                array_length = elements.size();
+            }
+    };
+
+    class Heap : public HeapBase {
+
+        public:
+            Heap(std::vector<int> &vec) : HeapBase(vec) {
             }
     };
 

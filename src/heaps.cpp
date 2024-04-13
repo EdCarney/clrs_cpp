@@ -4,24 +4,24 @@
 
 namespace heaps {
 
-    int Heap::left_child(int i) {
+    int HeapBase::left_child(int i) {
         return i * 2 + 1;
     }
 
-    int Heap::right_child(int i) {
+    int HeapBase::right_child(int i) {
         return (i + 1) * 2;
     }
 
-    int Heap::parent(int i) {
+    int HeapBase::parent(int i) {
         return (i - 1) / 2;
     }
 
-    int& Heap::operator[](unsigned int i) {
-        return array[i];
+    int& HeapBase::operator[](unsigned int i) {
+        return elements[i];
     }
 
-    const int& Heap::operator[](unsigned int i) const {
-        return array[i];
+    const int& HeapBase::operator[](unsigned int i) const {
+        return elements[i];
     }
 
     void max_heapify(Heap &heap, int i) {
@@ -30,10 +30,10 @@ namespace heaps {
         int l_child_index = heap.left_child(i);
         int r_child_index = heap.right_child(i);
 
-        if (l_child_index < heap.heap_size && heap[l_child_index] > heap[max_child_index]) {
+        if (l_child_index < heap.size && heap[l_child_index] > heap[max_child_index]) {
             max_child_index = l_child_index;
         }
-        if (r_child_index < heap.heap_size && heap[r_child_index] > heap[max_child_index]) {
+        if (r_child_index < heap.size && heap[r_child_index] > heap[max_child_index]) {
             max_child_index = r_child_index;
         }
 
@@ -46,7 +46,7 @@ namespace heaps {
     }
 
     void build_max_heap(Heap &heap) {
-        int leaf_end = heap.heap_size;
+        int leaf_end = heap.size;
 
         while (leaf_end >= 0) {
             max_heapify(heap, leaf_end--);
@@ -56,8 +56,8 @@ namespace heaps {
     void heap_sort(std::vector<int> &vec) {
         Heap heap = Heap(vec);
         build_max_heap(heap);
-        while (heap.heap_size > 0) {
-            int max_heap_index = --heap.heap_size;
+        while (heap.size > 0) {
+            int max_heap_index = --heap.size;
             int temp = heap[max_heap_index];
             heap[max_heap_index] = heap[0];
             heap[0] = temp;
