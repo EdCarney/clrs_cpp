@@ -5,7 +5,7 @@
 
 const int NUM_ARRAYS = 100;
 
-TEST(HeapsBase, InitHeapZeroElementVector) {
+TEST(HeapBase, InitHeapZeroElementVector) {
     std::vector<int> vec { };
 
     heaps::Heap heap = heaps::Heap(vec);
@@ -13,7 +13,7 @@ TEST(HeapsBase, InitHeapZeroElementVector) {
 	EXPECT_EQ(heap.size, 0);
 }
 
-TEST(HeapsBase, InitHeapSingleElementVector) {
+TEST(HeapBase, InitHeapSingleElementVector) {
     std::vector<int> vec { 1 };
 
     heaps::Heap heap = heaps::Heap(vec);
@@ -21,7 +21,7 @@ TEST(HeapsBase, InitHeapSingleElementVector) {
 	EXPECT_EQ(heap.size, 1);
 }
 
-TEST(HeapsBase, InitHeapMultiElementVector) {
+TEST(HeapBase, InitHeapMultiElementVector) {
     std::vector<int> vec { 1, 2, 3, 4 };
 
     heaps::Heap heap = heaps::Heap(vec);
@@ -29,7 +29,7 @@ TEST(HeapsBase, InitHeapMultiElementVector) {
 	EXPECT_EQ(heap.size, vec.size());
 }
 
-TEST(HeapsBase, MaxHeapifyZeroElementHeap) {
+TEST(HeapBase, MaxHeapifyZeroElementHeap) {
     std::vector<int> vec { };
     heaps::Heap heap = heaps::Heap(vec);
 	
@@ -38,7 +38,7 @@ TEST(HeapsBase, MaxHeapifyZeroElementHeap) {
 	EXPECT_EQ(heap.size, vec.size());
 }
 
-TEST(HeapsBase, MaxHeapifySingleElementHeap) {
+TEST(HeapBase, MaxHeapifySingleElementHeap) {
     std::vector<int> vec { 1 };
     heaps::Heap heap = heaps::Heap(vec);
 
@@ -47,7 +47,7 @@ TEST(HeapsBase, MaxHeapifySingleElementHeap) {
 	EXPECT_EQ(heap.size, vec.size());
 }
 
-TEST(HeapsBase, MaxHeapifyMultiElementHeap) {
+TEST(HeapBase, MaxHeapifyMultiElementHeap) {
     std::vector<int> vec { 1, 2, 3, 4 };
     heaps::Heap heap = heaps::Heap(vec);
 	
@@ -57,7 +57,7 @@ TEST(HeapsBase, MaxHeapifyMultiElementHeap) {
 	EXPECT_EQ(heap.size, vec.size());
 }
 
-TEST(HeapsBase, BuildMaxHeapZeroElementHeap) {
+TEST(HeapBase, BuildMaxHeapZeroElementHeap) {
 
     std::vector<int> vec { };
     heaps::Heap heap = heaps::Heap(vec);
@@ -67,7 +67,7 @@ TEST(HeapsBase, BuildMaxHeapZeroElementHeap) {
 	EXPECT_EQ(heap.size, vec.size());
 }
 
-TEST(HeapsBase, BuildMaxHeapSingleElementHeap) {
+TEST(HeapBase, BuildMaxHeapSingleElementHeap) {
     std::vector<int> vec { 1 };
     heaps::Heap heap = heaps::Heap(vec);
 
@@ -76,7 +76,7 @@ TEST(HeapsBase, BuildMaxHeapSingleElementHeap) {
 	EXPECT_EQ(heap.size, vec.size());
 }
 
-TEST(HeapsBase, BuildMaxHeapMultiElementHeap) {
+TEST(HeapBase, BuildMaxHeapMultiElementHeap) {
     std::vector<int> vec { 1, 2, 3, 4 };
     heaps::Heap heap = heaps::Heap(vec);
 	
@@ -86,19 +86,19 @@ TEST(HeapsBase, BuildMaxHeapMultiElementHeap) {
 	EXPECT_EQ(heap.size, vec.size());
 }
 
-TEST(HeapSortTests, ZeroElementArray) {
+TEST(HeapSort, ZeroElementArray) {
     std::vector<int> vec { };
     heaps::heap_sort(vec);
 	expect_vector_fwd_sorted(vec);
 }
 
-TEST(HeapSortTests, SingleElementArray) {
+TEST(HeapSort, SingleElementArray) {
     std::vector<int> vec { 1 };
     heaps::heap_sort(vec);
 	expect_vector_fwd_sorted(vec);
 }
 
-TEST(HeapSortTests, MultipleElementArrays) {
+TEST(HeapSort, MultipleElementArrays) {
 	srand(time(NULL));
 	std::unordered_map<int, int> vec_map_original;
 	std::unordered_map<int, int> vec_map_sorted;
@@ -112,4 +112,42 @@ TEST(HeapSortTests, MultipleElementArrays) {
 		expect_vector_fwd_sorted(vec);
 		expect_maps_equal(vec_map_original, vec_map_sorted);
 	}
+}
+
+TEST(MaxPriorityQueue, MaxSingleElementArray) {
+    std::vector<int> vec { 1 };
+    heaps::MaxPriorityQueue queue(vec);
+
+    int max = queue.max();
+
+    EXPECT_EQ(vec[0], max);
+}
+
+TEST(MaxPriorityQueue, MaxMultiElementArray) {
+    std::vector<int> vec { 1, 2, 3, 4 };
+    heaps::MaxPriorityQueue queue(vec);
+
+    int max = queue.max();
+
+    EXPECT_EQ(4, max);
+}
+
+TEST(MaxPriorityQueue, ExtractMaxSingleElementArray) {
+    std::vector<int> vec { 1 };
+    heaps::MaxPriorityQueue queue(vec);
+
+    int max = queue.extract_max();
+
+    EXPECT_EQ(vec[0], max);
+    EXPECT_EQ(0, queue.size);
+}
+
+TEST(MaxPriorityQueue, ExtractMaxMultiElementArray) {
+    std::vector<int> vec { 1, 2, 3, 4 };
+    heaps::MaxPriorityQueue queue(vec);
+
+    int max = queue.extract_max();
+
+    EXPECT_EQ(4, max);
+    EXPECT_EQ(3, queue.size);
 }

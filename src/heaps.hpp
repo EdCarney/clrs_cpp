@@ -23,6 +23,12 @@ namespace heaps {
             }
     };
 
+    void max_heapify(HeapBase &heap, int i);
+
+    void build_max_heap(HeapBase &heap);
+
+    void heap_sort(std::vector<int> &vec);
+
     class Heap : public HeapBase {
         public:
             Heap(std::vector<int> &vec) : HeapBase(vec) {
@@ -37,14 +43,9 @@ namespace heaps {
             void increase_key(int i, int key_value);
 
             MaxPriorityQueue(std::vector<int> &vec) : HeapBase(vec) {
+                build_max_heap(*this);
             }
     };
-
-    void max_heapify(HeapBase &heap, int i);
-
-    void build_max_heap(HeapBase &heap);
-
-    void heap_sort(std::vector<int> &vec);
 }
 
 #endif // HEAPS_HEADER_HPP
