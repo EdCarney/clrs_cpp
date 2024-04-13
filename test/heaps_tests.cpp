@@ -132,7 +132,7 @@ TEST(MaxPriorityQueue, MaxMultiElementArray) {
     EXPECT_EQ(4, max);
 }
 
-TEST(MaxPriorityQueue, ExtractMaxSingleElementArray) {
+TEST(MaxPriorityQueue, ExtractSingleMaxSingleElementArray) {
     std::vector<int> vec { 1 };
     heaps::MaxPriorityQueue queue(vec);
 
@@ -142,7 +142,7 @@ TEST(MaxPriorityQueue, ExtractMaxSingleElementArray) {
     EXPECT_EQ(0, queue.size);
 }
 
-TEST(MaxPriorityQueue, ExtractMaxMultiElementArray) {
+TEST(MaxPriorityQueue, ExtractSinlgeMaxMultiElementArray) {
     std::vector<int> vec { 1, 2, 3, 4 };
     heaps::MaxPriorityQueue queue(vec);
 
@@ -150,4 +150,68 @@ TEST(MaxPriorityQueue, ExtractMaxMultiElementArray) {
 
     EXPECT_EQ(4, max);
     EXPECT_EQ(3, queue.size);
+}
+
+TEST(MaxPriorityQueue, ExtractMultiMaxMultiElementArray) {
+    std::vector<int> vec { 1, 2, 3, 4 };
+    std::vector<int> expected { 4, 3, 2, 1 };
+    heaps::MaxPriorityQueue queue(vec);
+
+    std::vector<int> maxes(4);
+    for (int i = 0; i < vec.size(); i++) {
+        maxes[i] = queue.extract_max();
+    }
+
+    expect_vectors_equal(maxes, expected);
+    EXPECT_EQ(0, queue.size);
+}
+
+TEST(MaxPriorityQueue, InsertSingleZeroElementArray) {
+    std::vector<int> vec { };
+    heaps::MaxPriorityQueue queue(vec);
+
+    queue.insert(1);
+    int max = queue.max();
+
+    EXPECT_EQ(1, queue.size);
+    EXPECT_EQ(1, max);
+}
+
+TEST(MaxPriorityQueue, InsertMultipleZeroElementArray) {
+    std::vector<int> vec { };
+    heaps::MaxPriorityQueue queue(vec);
+
+    queue.insert(1);
+    queue.insert(5);
+    queue.insert(7);
+    queue.insert(3);
+    queue.insert(2);
+    int max = queue.max();
+
+    EXPECT_EQ(5, queue.size);
+    EXPECT_EQ(7, max);
+}
+
+TEST(MaxPriorityQueue, IncreaseSingleKeyMultipleElementArray) {
+    std::vector<int> vec { 1, 2, 3, 4 };
+    heaps::MaxPriorityQueue queue(vec);
+
+    queue.increase_key(3, 7);
+    int max = queue.max();
+
+    EXPECT_EQ(4, queue.size);
+    EXPECT_EQ(7, max);
+}
+
+TEST(MaxPriorityQueue, IncreaseMultipleKeyMultipleElementArray) {
+    std::vector<int> vec { 1, 2, 3, 4 };
+    heaps::MaxPriorityQueue queue(vec);
+
+    queue.increase_key(3, 5);
+    queue.increase_key(1, 6);
+    queue.increase_key(2, 7);
+    int max = queue.max();
+
+    EXPECT_EQ(4, queue.size);
+    EXPECT_EQ(7, max);
 }
