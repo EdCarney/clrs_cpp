@@ -2,6 +2,8 @@
 
 void merge_sort_internal(int[], int, int);
 void merge_combine(int[], int, int, int);
+void quick_sort_internal(int arr[], int start, int end);
+int quick_sort_partition(int arr[], int start, int end);
 
 namespace sorting {
 
@@ -51,6 +53,37 @@ namespace sorting {
 	void merge_sort(int arr[], int size) {
 		merge_sort_internal(arr, 0, size - 1);
 	}
+
+    void quick_sort(int arr[], int size) {
+        quick_sort_internal(arr, 0, size - 1);
+    }
+}
+
+void quick_sort_internal(int arr[], int start, int end) {
+    if (end <= start) {
+        return;
+    }
+    int q = quick_sort_partition(arr, start, end);
+    quick_sort_internal(arr, start, q - 1);
+    quick_sort_internal(arr, q + 1, end);
+}
+
+int quick_sort_partition(int arr[], int start, int end) {
+    int pivot = arr[end];
+    int i = start, j = start, temp;
+    while (j < end) {
+        if (arr[j] < pivot) {
+            temp = arr[i];
+            arr[i] = arr[j];
+            arr[j] = temp;
+            i++;
+        }
+        j++;
+    }
+    temp = arr[i];
+    arr[i] = arr[end];
+    arr[end] = temp;
+    return i;
 }
 
 void merge_sort_internal(int arr[], int p, int q) {

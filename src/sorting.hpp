@@ -11,6 +11,7 @@ namespace sorting {
 	
 	void merge_sort(int arr[], int size);
 
+    void quick_sort(int arr[], int size);
 }
 
 #endif // SORTING_HEADER_HPP
