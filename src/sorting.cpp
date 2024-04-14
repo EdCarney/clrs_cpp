@@ -1,9 +1,12 @@
 #include "sorting.hpp"
+#include <cstdlib>
 
 void merge_sort_internal(int[], int, int);
 void merge_combine(int[], int, int, int);
 void quick_sort_internal(int arr[], int start, int end);
 int quick_sort_partition(int arr[], int start, int end);
+void quick_sort_randomized_internal(int arr[], int start, int end);
+int quick_sort_randomized_partition(int arr[], int start, int end);
 
 namespace sorting {
 
@@ -54,9 +57,32 @@ namespace sorting {
 		merge_sort_internal(arr, 0, size - 1);
 	}
 
+    // Sorts the provided arrays using quick sort
     void quick_sort(int arr[], int size) {
         quick_sort_internal(arr, 0, size - 1);
     }
+
+    // Sorts the provided arrays using randomized quick sort
+    void quick_sort_randomized(int arr[], int size) {
+        quick_sort_randomized_internal(arr, 0, size - 1);
+    }
+}
+
+void quick_sort_randomized_internal(int arr[], int start, int end) {
+    if (end <= start) {
+        return;
+    }
+    int q = quick_sort_randomized_partition(arr, start, end);
+    quick_sort_internal(arr, start, q - 1);
+    quick_sort_internal(arr, q + 1, end);
+}
+
+int quick_sort_randomized_partition(int arr[], int start, int end) {
+    int rand_pivot_ind = start + (rand() % (end - start + 1));
+    int temp = arr[rand_pivot_ind];
+    arr[rand_pivot_ind] = arr[end];
+    arr[end] = temp;
+    return quick_sort_partition(arr, start, end);
 }
 
 void quick_sort_internal(int arr[], int start, int end) {

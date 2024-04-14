@@ -7,6 +7,12 @@ set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 enable_testing()
 
 add_library(
+	intervals_lib
+	src/intervals.hpp
+	src/intervals.cpp
+	)
+
+add_library(
 	sorting_lib
 	src/sorting.hpp
 	src/sorting.cpp
