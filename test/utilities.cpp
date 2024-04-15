@@ -41,16 +41,18 @@ void expect_vectors_equal(std::vector<int> vec_1, std::vector<int> vec_2) {
     }
 }
 
-std::tuple<int*, int> generate_random_array() {
+std::tuple<int*, int> generate_random_array(bool include_negatives) {
 	int size = rand() % MAX_ARRAY_SIZE + 1;
 	int *arr = new int[size]();
        	for (int i = 0; i < size; i++) {
-		arr[i] = rand() % MIN_MAX_ARRAY_ELEMENT;
+		arr[i] = 1 + rand() % MIN_MAX_ARRAY_ELEMENT;
 
-		// randomly negate some elements
-		bool make_negative = rand() % 3;
-		if (make_negative == 0)
-			arr[i] *= -1;
+        if (include_negatives) {
+		    // randomly negate some elements
+		    bool make_negative = rand() % 3;
+		    if (make_negative == 0)
+		    	arr[i] *= -1;
+        }
 	}
 	return std::make_tuple(arr, size);
 }

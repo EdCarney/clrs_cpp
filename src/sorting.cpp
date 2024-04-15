@@ -1,4 +1,5 @@
 #include "sorting.hpp"
+#include "debug_utilities.hpp"
 
 void merge_sort_internal(int[], int, int);
 void merge_combine(int[], int, int, int);
@@ -54,8 +55,39 @@ namespace sorting {
 		merge_sort_internal(arr, 0, size - 1);
 	}
 
+    // Sorts the provided array using quick sort
     void quick_sort(int arr[], int size) {
         quick_sort_internal(arr, 0, size - 1);
+    }
+
+    // Sorts the provided array using counting sort
+    void counting_sort(int arr[], int size, int max_number) {
+        int* B = new int[size]();
+        int* C = new int[max_number]();
+        // initialize counting array
+        for (int i = 0; i < max_number; i++) {
+            C[i] = 0;
+        }
+        // count the number of occurrences for each value
+        for (int i = 0; i < size; i++) {
+            C[arr[i] - 1] += 1;
+        }
+        // accumulate all of the values
+        for (int i = 1; i < max_number; i++) {
+            C[i] += C[i - 1];
+        }
+        // populate the capture array
+        for (int i = 0; i < size; i++) {
+            B[C[arr[i] - 1] - 1] = arr[i];
+            C[arr[i] - 1] -= 1;
+        }
+        // populate the original array
+        for (int i = 0; i < size; i++) {
+            arr[i] = B[i];
+        }
+
+        delete[] B;
+        delete[] C;
     }
 }
 
