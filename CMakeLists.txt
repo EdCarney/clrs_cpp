@@ -4,7 +4,11 @@ project(Algorithms VERSION 1.0.0)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
-enable_testing()
+add_library(
+	debug_utilities_lib
+	src/debug_utilities.hpp
+	src/debug_utilities.cpp
+	)
 
 add_library(
 	sorting_lib
@@ -36,6 +40,8 @@ set(LIBRARIES
     matrices_lib
     heaps_lib
     )
+
+target_link_libraries(sorting_lib PUBLIC debug_utilities_lib)
 
 add_subdirectory(googletest)
 add_subdirectory(test)
