@@ -62,31 +62,40 @@ namespace sorting {
         quick_sort_internal(arr, 0, size - 1);
     }
 
+    // Sorts the provided array using counting sort
     void counting_sort(int arr[], int size) {
         int min = INT_MAX, max = INT_MIN;
         for (int i = 0; i < size; i++) {
-            min = min <= arr[i] ? min : arr[i];
-            max = max >= arr[i] ? max : arr[i];
+            min = arr[i] < min ? arr[i] : min;
+            max = arr[i] > max ? arr[i] : max;
         }
         counting_sort_internal(arr, size, min, max);
     }
 
+    // Sorts the provided array using radix sort
     void radix_sort(int arr[], int size) {
-        // get the max in the array
-        // create an array 10 in length 
-        // create a mod number
-        // while the mod number is < 10*max
-        // populate the array
-        // feed the array to sort along with its parent to the radix counting sort
-        int max = INT_MIN;
+        int min = INT_MAX, max = INT_MIN;
         for (int i = 0; i < size; i++) {
+            min = arr[i] < min ? arr[i] : min;
             max = arr[i] > max ? arr[i] : max;
         }
+
+        // shift array left to ensure elements are zero-based
+        // this also reduces the while loop iterations required
+        for (int i = 0; i < size; i++) {
+            arr[i] -= min;
+        }
+        max -= min;
 
         int mod_num = 10;
         while (mod_num < 10 * max) {
             radix_counting_sort(arr, size, mod_num);
             mod_num *= 10;
+        }
+
+        // undo previous modification
+        for (int i = 0; i < size; i++) {
+            arr[i] += min;
         }
     }
 }
