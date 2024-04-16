@@ -179,7 +179,7 @@ TEST(CountingSortTests, MultipleElementArrays) {
 	std::unordered_map<int, int> arr_map_original;
 	std::unordered_map<int, int> arr_map_sorted;
 	for (int i = 0; i < NUM_ARRAYS; i++) {
-		auto [arr, size] = generate_random_array(false);
+		auto [arr, size] = generate_random_array();
         int max = 0;
         for (int j = 0; j < size; j++) {
             max = arr[j] > max ? arr[j] : max;

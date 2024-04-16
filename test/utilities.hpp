@@ -14,7 +14,7 @@ void expect_maps_equal(std::unordered_map<int, int> arr_map_1, std::unordered_ma
 
 void expect_vectors_equal(std::vector<int> vec_1, std::vector<int> vec_2);
 
-std::tuple<int*, int> generate_random_array(bool include_negatives = true);
+std::tuple<int*, int> generate_random_array();
 
 std::vector<int> generate_random_vector();
 
