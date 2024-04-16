@@ -115,7 +115,7 @@ void radix_counting_sort(int arr[], int size, int mod) {
     while (j >= 0) {
         int arr_elm = arr[j];
         int digit = (arr_elm % mod - (arr_elm % (mod / 10))) / (mod / 10);
-        B[C[digit]] = arr[j];
+        B[C[digit] - 1] = arr_elm;
         C[digit] -= 1;
         --j;
     }

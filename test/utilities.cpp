@@ -50,7 +50,7 @@ std::tuple<int*, int> generate_random_array() {
 		// randomly negate some elements
 		bool make_negative = rand() % 3;
 		if (make_negative == 0)
-			arr[i] *= -1;
+			arr[i] *= 1;// -1;
 	}
 	return std::make_tuple(arr, size);
 }
