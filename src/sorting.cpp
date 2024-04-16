@@ -6,6 +6,7 @@ void merge_combine(int[], int, int, int);
 void quick_sort_internal(int arr[], int start, int end);
 int quick_sort_partition(int arr[], int start, int end);
 void counting_sort_internal(int arr[], int size, int min, int max);
+void radix_counting_sort(int arr[], int size, int mod);
 
 namespace sorting {
 
@@ -69,6 +70,62 @@ namespace sorting {
         }
         counting_sort_internal(arr, size, min, max);
     }
+
+    void radix_sort(int arr[], int size) {
+        // get the max in the array
+        // create an array 10 in length 
+        // create a mod number
+        // while the mod number is < 10*max
+        // populate the array
+        // feed the array to sort along with its parent to the radix counting sort
+        int max = INT_MIN;
+        for (int i = 0; i < size; i++) {
+            max = arr[i] > max ? arr[i] : max;
+        }
+
+        int mod_num = 10;
+        while (mod_num < 10 * max) {
+            radix_counting_sort(arr, size, mod_num);
+            mod_num *= 10;
+        }
+    }
+}
+
+void radix_counting_sort(int arr[], int size, int mod) {
+    int k = 10;
+    int* B = new int[size];
+    int* C = new int[k];
+    // initialize counting array
+    for (int i = 0; i < k; i++) {
+        C[i] = 0;
+    }
+    // populate counting array
+    for (int i = 0; i < size; i++) {
+        int arr_elm = arr[i];
+        int digit = (arr_elm % mod - (arr_elm % (mod / 10))) / (mod / 10);
+        C[digit] += 1;
+    }
+    // accumulate all of the values
+    for (int i = 1; i < k; i++) {
+        C[i] += C[i - 1];
+    }
+    // populate the capture array
+    // need to do this opposite way to retain original sorting for radix
+    int j = size - 1;
+    while (j >= 0) {
+        int arr_elm = arr[j];
+        int digit = (arr_elm % mod - (arr_elm % (mod / 10))) / (mod / 10);
+        B[C[digit]] = arr[j];
+        C[digit] -= 1;
+        --j;
+    }
+    // populate the original array
+    for (int i = 0; i < size; i++) {
+        arr[i] = B[i];
+    }
+
+    delete[] B;
+    delete[] C;
 }
 
 void quick_sort_internal(int arr[], int start, int end) {

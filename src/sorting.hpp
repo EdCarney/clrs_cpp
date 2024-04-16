@@ -14,6 +14,8 @@ namespace sorting {
     void quick_sort(int arr[], int size);
 
     void counting_sort(int arr[], int size);
+
+    void radix_sort(int arr[], int size);
 }
 
 #endif // SORTING_HEADER_HPP
