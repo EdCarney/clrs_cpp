@@ -45,7 +45,7 @@ std::tuple<int*, int> generate_random_array(bool include_negatives) {
 	int size = rand() % MAX_ARRAY_SIZE + 1;
 	int *arr = new int[size]();
        	for (int i = 0; i < size; i++) {
-		arr[i] = 1 + rand() % MIN_MAX_ARRAY_ELEMENT;
+		arr[i] = rand() % MIN_MAX_ARRAY_ELEMENT;
 
         if (include_negatives) {
 		    // randomly negate some elements

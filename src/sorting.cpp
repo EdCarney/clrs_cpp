@@ -5,6 +5,7 @@ void merge_sort_internal(int[], int, int);
 void merge_combine(int[], int, int, int);
 void quick_sort_internal(int arr[], int start, int end);
 int quick_sort_partition(int arr[], int start, int end);
+void counting_sort_internal(int arr[], int size, int min, int max);
 
 namespace sorting {
 
@@ -60,34 +61,13 @@ namespace sorting {
         quick_sort_internal(arr, 0, size - 1);
     }
 
-    // Sorts the provided array using counting sort
-    void counting_sort(int arr[], int size, int max_number) {
-        int* B = new int[size]();
-        int* C = new int[max_number]();
-        // initialize counting array
-        for (int i = 0; i < max_number; i++) {
-            C[i] = 0;
-        }
-        // count the number of occurrences for each value
+    void counting_sort(int arr[], int size) {
+        int min = INT_MAX, max = INT_MIN;
         for (int i = 0; i < size; i++) {
-            C[arr[i] - 1] += 1;
+            min = min <= arr[i] ? min : arr[i];
+            max = max >= arr[i] ? max : arr[i];
         }
-        // accumulate all of the values
-        for (int i = 1; i < max_number; i++) {
-            C[i] += C[i - 1];
-        }
-        // populate the capture array
-        for (int i = 0; i < size; i++) {
-            B[C[arr[i] - 1] - 1] = arr[i];
-            C[arr[i] - 1] -= 1;
-        }
-        // populate the original array
-        for (int i = 0; i < size; i++) {
-            arr[i] = B[i];
-        }
-
-        delete[] B;
-        delete[] C;
+        counting_sort_internal(arr, size, min, max);
     }
 }
 
@@ -150,4 +130,35 @@ void merge_combine(int arr[], int p, int r, int q) {
 	}
 	delete[] L;
 	delete[] R;
+}
+
+// Sorts the provided array using counting sort
+void counting_sort_internal(int arr[], int size, int min, int max) {
+    int k = max - min + 1;
+    int* B = new int[size]();
+    int* C = new int[k]();
+    // initialize counting array
+    for (int i = 0; i < k; i++) {
+        C[i] = 0;
+    }
+    // count the number of occurrences for each value
+    for (int i = 0; i < size; i++) {
+        C[arr[i] - min] += 1;
+    }
+    // accumulate all of the values
+    for (int i = 1; i < k; i++) {
+        C[i] += C[i - 1];
+    }
+    // populate the capture array
+    for (int i = 0; i < size; i++) {
+        B[C[arr[i] - min] - 1] = arr[i];
+        C[arr[i] - min] -= 1;
+    }
+    // populate the original array
+    for (int i = 0; i < size; i++) {
+        arr[i] = B[i];
+    }
+
+    delete[] B;
+    delete[] C;
 }

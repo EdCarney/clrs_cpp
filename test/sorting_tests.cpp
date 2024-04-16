@@ -163,14 +163,14 @@ TEST(QuickSortTests, MultipleElementArrays) {
 TEST(CountingSortTests, ZeroElementArray) {
 	int arr[] = { };
 	int size = 0;
-	sorting::counting_sort(arr, size, 0);
+	sorting::counting_sort(arr, size);
 	expect_array_fwd_sorted(arr, size);
 }
 
 TEST(CountingSortTests, SingleElementArray) {
 	int arr[] = { 1 };
 	int size = 1;
-	sorting::counting_sort(arr, size, 1);
+	sorting::counting_sort(arr, size);
 	expect_array_fwd_sorted(arr, size);
 }
 
@@ -186,7 +186,7 @@ TEST(CountingSortTests, MultipleElementArrays) {
         }
 
 		populate_array_map(arr_map_original, arr, size);
-		sorting::counting_sort(arr, size, max);
+		sorting::counting_sort(arr, size);
 		populate_array_map(arr_map_sorted, arr, size);
 
 		expect_array_fwd_sorted(arr, size);
