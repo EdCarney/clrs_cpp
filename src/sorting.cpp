@@ -1,5 +1,6 @@
 #include "sorting.hpp"
 #include "debug_utilities.hpp"
+#include <tuple>
 
 void merge_sort_internal(int[], int, int);
 void merge_combine(int[], int, int, int);
@@ -7,6 +8,12 @@ void quick_sort_internal(int arr[], int start, int end);
 int quick_sort_partition(int arr[], int start, int end);
 void counting_sort_internal(int arr[], int size, int min, int max);
 void radix_counting_sort(int arr[], int size, int mod);
+std::tuple<int, int> get_min_max(int arr[], int size);
+
+struct node {
+    int val;
+    node* next;
+};
 
 namespace sorting {
 
@@ -64,21 +71,14 @@ namespace sorting {
 
     // Sorts the provided array using counting sort
     void counting_sort(int arr[], int size) {
-        int min = INT_MAX, max = INT_MIN;
-        for (int i = 0; i < size; i++) {
-            min = arr[i] < min ? arr[i] : min;
-            max = arr[i] > max ? arr[i] : max;
-        }
+        auto [min, max] = get_min_max(arr, size);
         counting_sort_internal(arr, size, min, max);
     }
 
     // Sorts the provided array using radix sort
     void radix_sort(int arr[], int size) {
-        int min = INT_MAX, max = INT_MIN;
-        for (int i = 0; i < size; i++) {
-            min = arr[i] < min ? arr[i] : min;
-            max = arr[i] > max ? arr[i] : max;
-        }
+
+        auto [min, max] = get_min_max(arr, size);
 
         // shift array left to ensure elements are zero-based
         // this also reduces the while loop iterations required
@@ -98,6 +98,86 @@ namespace sorting {
             arr[i] += min;
         }
     }
+
+    void bucket_sort(int arr[], int size) {
+        auto [min, max] = get_min_max(arr, size);
+        
+        // shift array left to ensure elements are zero-based
+        for (int i = 0; i < size; i++) {
+            arr[i] -= min;
+        }
+
+        node** B = new node*[size];
+        for (int i = 0; i < size; i++) {
+            B[i] = nullptr;
+        }
+        
+        // populate linked list
+        for (int i = 0; i < size; i++) {
+            int ind = arr[i] % size;
+            node* new_node = new node { arr[i], nullptr };
+            node* curr_node = B[ind];
+
+            while (curr_node != nullptr) {
+                curr_node = curr_node->next;
+            }
+            curr_node = new_node;
+        }
+
+        int arr_ptr = 0;
+        for (int i = 0; i < size; i++) {
+            node *curr_node;
+            int list_size = 0;
+
+            // get size of list
+            list_size = 0;
+            curr_node = B[i];
+            while (curr_node != nullptr) {
+                list_size++;
+                curr_node = curr_node->next;
+            }
+
+            // read linked list into array
+            int *sorted = new int[list_size];
+            list_size = 0;
+            curr_node = B[i];
+            while (curr_node != nullptr) {
+                sorted[list_size++] = curr_node->val;
+                curr_node = curr_node->next;
+            }
+            
+            // insertion sort
+            for (int j = 1; j < list_size; j++) {
+                for (int k = j - 1; k >= 0; k--) {
+                    if (sorted[k] > sorted[j]) {
+                        int temp = sorted[k];
+                        sorted[k] = sorted[j];
+                        sorted[j] = temp;
+                    }
+                }
+            }
+
+            // populate given array w/ sorted values
+            for (int j = 0; j < list_size; j++) {
+                arr[arr_ptr++] = sorted[j];
+            }
+        }
+
+
+        // undo previous modification
+        for (int i = 0; i < size; i++) {
+            arr[i] += min;
+        }
+    }
+}
+
+std::tuple<int, int> get_min_max(int arr[], int size) {
+    int min = INT_MAX, max = INT_MIN;
+    for (int i = 0; i < size; i++) {
+        min = arr[i] < min ? arr[i] : min;
+        max = arr[i] > max ? arr[i] : max;
+    }
+    return std::make_tuple(min, max);
 }
 
 void radix_counting_sort(int arr[], int size, int mod) {
