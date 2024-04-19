@@ -114,14 +114,19 @@ namespace sorting {
         
         // populate linked list
         for (int i = 0; i < size; i++) {
-            int ind = arr[i] % size;
-            node* new_node = new node { arr[i], nullptr };
-            node* curr_node = B[ind];
-
-            while (curr_node != nullptr) {
-                curr_node = curr_node->next;
+            double ratio = (double)arr[i] / (double)(max - min);
+            int ind = ceil(ratio * size) - 1;
+            ind = ind < 0 ? 0 : ind; // handle case where value is zero
+            
+            if (B[ind] == nullptr) {
+                B[ind] = new node { arr[i], nullptr };
+            } else {
+                node* curr_node = B[ind];
+                while (curr_node->next != nullptr) {
+                    curr_node = curr_node->next;
+                }
+                curr_node->next = new node { arr[i], nullptr };
             }
-            curr_node = new_node;
         }
 
         int arr_ptr = 0;
@@ -149,10 +154,10 @@ namespace sorting {
             // insertion sort
             for (int j = 1; j < list_size; j++) {
                 for (int k = j - 1; k >= 0; k--) {
-                    if (sorted[k] > sorted[j]) {
+                    if (sorted[k] > sorted[k + 1]) {
                         int temp = sorted[k];
-                        sorted[k] = sorted[j];
-                        sorted[j] = temp;
+                        sorted[k] = sorted[k + 1];
+                        sorted[k + 1] = temp;
                     }
                 }
             }
@@ -162,7 +167,6 @@ namespace sorting {
                 arr[arr_ptr++] = sorted[j];
             }
         }
-
 
         // undo previous modification
         for (int i = 0; i < size; i++) {

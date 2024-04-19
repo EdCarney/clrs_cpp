@@ -221,3 +221,34 @@ TEST(RadixSortTests, MultipleElementArrays) {
 		delete[] arr;
 	}
 }
+
+TEST(BucketSortTests, ZeroElementArray) {
+	int arr[] = { };
+	int size = 0;
+	sorting::bucket_sort(arr, size);
+	expect_array_fwd_sorted(arr, size);
+}
+
+TEST(BucketSortTests, SingleElementArray) {
+	int arr[] = { 1 };
+	int size = 1;
+	sorting::bucket_sort(arr, size);
+	expect_array_fwd_sorted(arr, size);
+}
+
+TEST(BucketSortTests, MultipleElementArrays) {
+	srand(time(NULL));
+	std::unordered_map<int, int> arr_map_original;
+	std::unordered_map<int, int> arr_map_sorted;
+	for (int i = 0; i < NUM_ARRAYS; i++) {
+		auto [arr, size] = generate_random_array();
+
+		populate_array_map(arr_map_original, arr, size);
+		sorting::bucket_sort(arr, size);
+		populate_array_map(arr_map_sorted, arr, size);
+
+		expect_array_fwd_sorted(arr, size);
+		expect_maps_equal(arr_map_original, arr_map_sorted);
+		delete[] arr;
+	}
+}
