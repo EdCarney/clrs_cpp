@@ -11,6 +11,12 @@ add_library(
 	)
 
 add_library(
+    selection_lib
+    src/selection.hpp
+    src/selection.cpp
+    )
+
+add_library(
 	sorting_lib
 	src/sorting.hpp
 	src/sorting.cpp
