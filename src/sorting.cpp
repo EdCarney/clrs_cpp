@@ -1,6 +1,8 @@
 #include "sorting.hpp"
 #include "debug_utilities.hpp"
 #include <tuple>
+#include <cmath>
+#include <limits.h>
 
 void merge_sort_internal(int[], int, int);
 void merge_combine(int[], int, int, int);
@@ -115,7 +117,7 @@ namespace sorting {
         // populate linked list
         for (int i = 0; i < size; i++) {
             double ratio = (double)arr[i] / (double)(max - min);
-            int ind = ceil(ratio * size) - 1;
+            int ind = std::ceil(ratio * size) - 1;
             ind = ind < 0 ? 0 : ind; // handle case where value is zero
             
             if (B[ind] == nullptr) {

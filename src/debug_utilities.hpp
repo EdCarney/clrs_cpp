@@ -1,4 +1,5 @@
 #include <vector>
+#include <string>
 
 namespace debug_utilities {
 

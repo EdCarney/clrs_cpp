@@ -1,7 +1,7 @@
 #include "../src/arrays.hpp"
 #include <gtest/gtest.h>
 #include <tuple>
-#include <limits>
+#include <limits.h>
 
 TEST(MaxSubarrayBruteForce, ZeroElementArray) {
 	int arr[] = {};

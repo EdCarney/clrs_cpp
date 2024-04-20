@@ -1,6 +1,5 @@
 #include "arrays.hpp"
-#include <limits>
-#include <cstdio>
+#include <limits.h>
 
 arrays::array_def max_subarray_dnc_internal(int[], int, int);
 arrays::array_def max_subarray_dnc_maxcrossing(int[], int, int, int);
@@ -10,7 +9,7 @@ namespace arrays {
 	// Uses an O(n^2) brute force approach.
 	// Returns a tuple of (max, start_index, end_index)
 	array_def max_subarray_bruteforce(int arr[], int size) {
-		int max = constants::INT_MIN;
+		int max = INT_MIN;
 		int ind_L = -1;
 		int ind_R = -1;
 		for (int i = 0; i < size; i++) {
@@ -32,7 +31,7 @@ namespace arrays {
 	// Returns a tuple of (max, start_index, end_index)
 	array_def max_subarray_dnc(int arr[], int size) {
 		if (size == 0) {
-			return std::make_tuple(constants::INT_MIN, -1, -1);
+			return std::make_tuple(INT_MIN, -1, -1);
 		}
 		return max_subarray_dnc_internal(arr, 0, size - 1);
 	}
@@ -41,7 +40,7 @@ namespace arrays {
 	// Uses an O(n) linear one-pass approach.
 	// Returns a tuple of (max, start_index, end_index)
 	array_def max_subarray_singlepass(int arr[], int size) {
-		int max_sum = constants::INT_MIN;
+		int max_sum = INT_MIN;
 		int current_sum = 0;
 		int high = -1, low = -1;
 		int current_high = 0, current_low = 0;
@@ -90,7 +89,7 @@ arrays::array_def max_subarray_dnc_internal(int arr[], int low, int high) {
 arrays::array_def max_subarray_dnc_maxcrossing(int arr[], int low, int mid, int high) {
 	int sum, max_L, max_R;
 
-	int sum_L = arrays::constants::INT_MIN;
+	int sum_L = INT_MIN;
 	sum = 0;
 	for (int i = mid; i >= low; i--) {
 		sum += arr[i];
@@ -100,7 +99,7 @@ arrays::array_def max_subarray_dnc_maxcrossing(int arr[], int low, int mid, int 
 		}
 	}
 
-	int sum_R = arrays::constants::INT_MIN;
+	int sum_R = INT_MIN;
 	sum = 0;
 	for (int i = mid + 1; i <= high; i++) {
 		sum += arr[i];
