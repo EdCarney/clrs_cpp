@@ -22,22 +22,24 @@ int randomized_select_internal(std::vector<int> vec, int start, int end, int i) 
         return vec.at(start);
     }
 
+    // q is absolute position, k is relative
     int q = randomized_partition(vec, start, end);
+    int k = q - start;
 
-    if (i == q) {
-        return vec.at(i);
-    } else if (i < q) {
+    if (i == k) {
+        return vec.at(q);
+    } else if (i < k) {
         return randomized_select_internal(vec, start, q - 1, i);
     }
     else {
-        return randomized_select_internal(vec, q + 1, end, i - q - 1);
+        return randomized_select_internal(vec, q + 1, end, i - k - 1);
     }
 }
 
 int randomized_partition(std::vector<int> &vec, int start, int end) {
     int len = end - start + 1;
     int pivot_ind = start + std::rand() % len;
-    
+
     // move pivot to front
     std::swap(vec.at(pivot_ind), vec.at(end));
     int pivot = vec.at(end);
