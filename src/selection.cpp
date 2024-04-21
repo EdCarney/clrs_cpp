@@ -13,29 +13,24 @@ int get_lower_median(int len) {
 
 namespace selection {
 
-    // Finds the i-th largest element in the provided vector
+    // Finds the i-th largest element in the provided vector using random partitioning.
     // The value of i should range between 0 and one less than the vector size.
     int randomized_select(std::vector<int> vec, int i) {
         return randomized_select_internal(vec, 0, vec.size() - 1, i);
     }
 
+    // Finds the i-th largest element in the provided vector using 5-part split.
+    // The value of i should range between 0 and one less than the vector size.
     int split_select(std::vector<int> vec, int i) {
         return split_select_internal(vec, 0, vec.size() - 1, i);
     }
 }
 
-// break array into smaller arrays of max size 5
-// insertion sort each array
-// get the median of each array
-// get an array of these medians
-// get the median of medians by a recursive call to this algo
-// partition the array about the median of medians
-// then recursive call on the left or right side depending median vs i
 int split_select_internal(std::vector<int> &vec, int start, int end, int i) {
     // check for bottom-out
     int len = end - start + 1;
     if (len <= 1) {
-        return start;
+        return vec.at(start);
     }
 
     // initialize median map
@@ -76,7 +71,16 @@ int split_select_internal(std::vector<int> &vec, int start, int end, int i) {
 
     // get median of medians via recursive call
     int m_len = median_elements.size();
-    int median_median_ind = split_select_internal(median_elements, 0, m_len - 1, get_lower_median(m_len));
+    int median_median = split_select_internal(median_elements, 0, m_len - 1, get_lower_median(m_len));
+    int median_median_ind = -1;
+
+    // get location of median in vec
+    for (int i = start; i <= end; i++) {
+        if (median_median == vec[i]) {
+            median_median_ind = i;
+            break;
+        }
+    }
 
     // partition about median_median
     // q is absolute, k is relative
