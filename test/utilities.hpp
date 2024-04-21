@@ -21,4 +21,12 @@ void populate_array_map(std::unordered_map<int, int> arr_map, int arr[], int siz
 
 void populate_vector_map(std::unordered_map<int, int> vec_map, std::vector<int> vec);
 
+int max_vector_ind(std::vector<int> vec);
+
+int min_vector_ind(std::vector<int> vec);
+
+int max_array_ind(int arr[], int size);
+
+int min_array_ind(int arr[], int size);
+
 #endif // UTILITIES_HPP_INCLUDED

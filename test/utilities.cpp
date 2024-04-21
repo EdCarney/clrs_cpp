@@ -87,3 +87,32 @@ void populate_vector_map(std::unordered_map<int, int> vec_map, std::vector<int> 
 		vec_map[element]++;
 	}
 }
+
+int max_vector_ind(std::vector<int> vec) {
+    int max_ind = 0;
+    for (int i = 1; i < vec.size(); i++) 
+        max_ind = vec.at(i) > vec.at(max_ind) ? i : max_ind;
+    return max_ind;
+}
+
+
+int min_vector_ind(std::vector<int> vec) {
+    int min_ind = 0;
+    for (int i = 1; i < vec.size(); i++) 
+        min_ind = vec.at(i) < vec.at(min_ind) ? i : min_ind;
+    return min_ind;
+}
+
+int max_array_ind(int arr[], int size) {
+    int max_ind = 0;
+    for (int i = 1; i < size; i++)
+        max_ind = arr[i] > arr[max_ind] ? i : max_ind;
+    return max_ind;
+}
+
+int min_array_ind(int arr[], int size) {
+    int min_ind = 0;
+    for (int i = 1; i < size; i++)
+        min_ind = arr[i] < arr[min_ind] ? i : min_ind;
+    return min_ind;
+}
