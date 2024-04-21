@@ -1,7 +1,5 @@
 #include "../src/sorting.hpp"
 #include "utilities.hpp"
-#include <map>
-#include <tuple>
 
 const int NUM_ARRAYS = 100;
 
