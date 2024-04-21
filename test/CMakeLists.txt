@@ -7,6 +7,7 @@ set(Sources
 	arrays_tests.cpp
 	matrices_tests.cpp
     heaps_tests.cpp
+    selection_tests.cpp
     utilities.cpp
 )
 
@@ -17,6 +18,7 @@ target_link_libraries(${This} PUBLIC
 	arrays_lib
 	matrices_lib
     heaps_lib
+    selection_lib
 )
 
 add_test(
