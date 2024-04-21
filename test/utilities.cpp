@@ -2,7 +2,6 @@
 #include <gtest/gtest.h>
 #include <vector>
 #include <tuple>
-#include <map>
 
 const int MAX_ARRAY_SIZE = 100;
 const int MIN_MAX_ARRAY_ELEMENT = 1000;
