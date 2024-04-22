@@ -5,6 +5,18 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 add_library(
+	queue_lib
+	src/data_structures/queues.hpp
+	src/data_structures/queues.cpp
+	)
+
+add_library(
+	stacks_lib
+	src/data_structures/stacks.hpp
+	src/data_structures/stacks.cpp
+	)
+
+add_library(
 	debug_utilities_lib
 	src/debug_utilities.hpp
 	src/debug_utilities.cpp
