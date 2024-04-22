@@ -25,21 +25,21 @@ namespace stacks {
 
     int Stack::top() {
         if (_top_ind < 0) {
-            throw new std::runtime_error("Stack underflow");
+            throw std::runtime_error("Stack underflow");
         }
         return _arr[_top_ind];
     }
 
     int Stack::pop() {
         if (_top_ind < 0) {
-            throw new std::runtime_error("Stack underflow");
+            throw std::runtime_error("Stack underflow");
         }
         return _arr[_top_ind--];
     }
 
     void Stack::push(int val) {
         if (_top_ind + 1 == _size) {
-            throw new std::runtime_error("Stack overflow");
+            throw std::runtime_error("Stack overflow");
         }
         _arr[++_top_ind] = val;
     }

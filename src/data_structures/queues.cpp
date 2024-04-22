@@ -25,14 +25,14 @@ namespace queues {
 
     int Queue::peek() {
         if (_is_empty) {
-            throw new std::runtime_error("Queue underflow");
+            throw std::runtime_error("Queue underflow");
         }
         return _arr[_head_ind];
     }
 
     int Queue::dequeue() {
         if (_is_empty) {
-            throw new std::runtime_error("Queue underflow");
+            throw std::runtime_error("Queue underflow");
         }
         int val = _arr[_head_ind];
         _head_ind = (_head_ind + 1) % _size;
@@ -44,7 +44,7 @@ namespace queues {
 
     void Queue::enqueue(int val) {
         if (_is_full) {
-            throw new std::runtime_error("Queue overflow");
+            throw std::runtime_error("Queue overflow");
         }
         _arr[_tail_ind] = val;
         _tail_ind = (_tail_ind + 1) % _size;
