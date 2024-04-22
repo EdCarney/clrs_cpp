@@ -1,6 +1,5 @@
-#include "../src/heaps.hpp"
+#include "../src/sorting_and_ordering/heaps.hpp"
 #include "utilities.hpp"
-#include <map>
 #include <vector>
 
 const int NUM_ARRAYS = 100;

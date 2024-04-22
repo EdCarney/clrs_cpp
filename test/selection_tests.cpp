@@ -1,4 +1,4 @@
-#include "../src/selection.hpp"
+#include "../src/sorting_and_ordering/selection.hpp"
 #include "utilities.hpp"
 
 const int NUM_ARRAYS = 100;

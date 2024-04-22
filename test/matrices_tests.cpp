@@ -1,4 +1,4 @@
-#include "../src/matrices.hpp"
+#include "../src/sorting_and_ordering/matrices.hpp"
 #include <gtest/gtest.h>
 #include <vector>
 

@@ -1,4 +1,4 @@
-#include "../src/arrays.hpp"
+#include "../src/sorting_and_ordering/arrays.hpp"
 #include <gtest/gtest.h>
 #include <tuple>
 #include <limits.h>

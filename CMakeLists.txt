@@ -12,32 +12,32 @@ add_library(
 
 add_library(
     selection_lib
-    src/selection.hpp
-    src/selection.cpp
+    src/sorting_and_ordering/selection.hpp
+    src/sorting_and_ordering/selection.cpp
     )
 
 add_library(
 	sorting_lib
-	src/sorting.hpp
-	src/sorting.cpp
+	src/sorting_and_ordering/sorting.hpp
+	src/sorting_and_ordering/sorting.cpp
 	)
 
 add_library(
 	arrays_lib
-	src/arrays.hpp
-	src/arrays.cpp
+	src/sorting_and_ordering/arrays.hpp
+	src/sorting_and_ordering/arrays.cpp
 	)
 
 add_library(
 	matrices_lib
-	src/matrices.hpp
-	src/matrices.cpp
+	src/sorting_and_ordering/matrices.hpp
+	src/sorting_and_ordering/matrices.cpp
 	)
 
 add_library(
 	heaps_lib
-	src/heaps.hpp
-	src/heaps.cpp
+	src/sorting_and_ordering/heaps.hpp
+	src/sorting_and_ordering/heaps.cpp
 	)
 
 set(LIBRARIES

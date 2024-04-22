@@ -1,5 +1,4 @@
 #include "sorting.hpp"
-#include "debug_utilities.hpp"
 #include <tuple>
 #include <cmath>
 #include <limits.h>
