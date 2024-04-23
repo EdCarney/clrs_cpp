@@ -8,10 +8,10 @@ namespace linked_lists {
         node_single *next;
     };
 
-    struct node_double {
+    struct d_node {
         int val;
-        node_double *next;
-        node_double *prev;
+        d_node *next;
+        d_node *prev;
     };
 
     class DoublyLinkedList {
@@ -19,16 +19,18 @@ namespace linked_lists {
             DoublyLinkedList();
             ~DoublyLinkedList();
 
-            const node_double * get_head();
-            const node_double * get_tail();
+            const d_node * get_head();
+            const d_node * get_tail();
 
-            node_double *search_node(int val);
+            bool is_empty();
+            int get_size();
+            d_node *search_node(int val);
             void insert_node(int val);
             void delete_node(int val);
 
         private:
-            node_double *_head;
-            node_double *_tail;
+            d_node *_head;
+            d_node *_tail;
     };
 
     class SinglyLinkedList {

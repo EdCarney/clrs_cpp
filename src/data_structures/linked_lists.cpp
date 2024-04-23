@@ -5,7 +5,7 @@ namespace linked_lists {
     DoublyLinkedList::DoublyLinkedList() : _head(nullptr), _tail(nullptr) { }
 
     DoublyLinkedList::~DoublyLinkedList() {
-        node_double *curr = _head, *prev = nullptr;
+        d_node *curr = _head, *prev = nullptr;
         while (curr != nullptr) {
             prev = curr;
             curr = curr->next;
@@ -13,16 +13,31 @@ namespace linked_lists {
         }
     }
 
-    const node_double *DoublyLinkedList::get_head() {
+    const d_node *DoublyLinkedList::get_head() {
         return _head;
     }
     
-    const node_double *DoublyLinkedList::get_tail() {
+    const d_node *DoublyLinkedList::get_tail() {
         return _tail;
     }
 
-    node_double *DoublyLinkedList::search_node(int val) {
-        node_double *curr = _head;
+    bool DoublyLinkedList::is_empty() {
+        return _tail == nullptr
+            || _head == nullptr;
+    }
+
+    int DoublyLinkedList::get_size() {
+        int size = 0;
+        d_node *curr = _head;
+        while (curr != nullptr) {
+            curr = curr->next;
+            ++size;
+        }
+        return size;
+    }
+
+    d_node *DoublyLinkedList::search_node(int val) {
+        d_node *curr = _head;
         while (curr != nullptr && curr->val != val) {
             curr = curr->next;
         }
@@ -30,7 +45,7 @@ namespace linked_lists {
     }
 
     void DoublyLinkedList::insert_node(int val) {
-        node_double *new_node = new node_double { val, _head, nullptr };
+        d_node *new_node = new d_node { val, _head, nullptr };
         if (_head != nullptr) {
             _head->prev = new_node;
         } else {
@@ -40,7 +55,7 @@ namespace linked_lists {
     }
     
     void DoublyLinkedList::delete_node(int val) {
-        node_double *to_delete = search_node(val);
+        d_node *to_delete = search_node(val);
 
         if (to_delete->next != nullptr) {
             to_delete->next->prev = to_delete->prev;

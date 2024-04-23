@@ -10,6 +10,7 @@ set(Sources
     selection_tests.cpp
     queues_tests.cpp
     stacks_tests.cpp
+    linked_lists_tests.cpp
     utilities.cpp
 )
 
@@ -23,6 +24,7 @@ target_link_libraries(${This} PUBLIC
     selection_lib
     stacks_lib
     queues_lib
+    linked_lists_lib
 )
 
 add_test(
