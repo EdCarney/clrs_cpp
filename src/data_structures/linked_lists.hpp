@@ -3,9 +3,9 @@
 
 namespace linked_lists {
 
-    struct node_single {
+    struct s_node {
         int val;
-        node_single *next;
+        s_node *next;
     };
 
     struct d_node {
@@ -34,6 +34,22 @@ namespace linked_lists {
     };
 
     class SinglyLinkedList {
+        public:
+            SinglyLinkedList();
+            ~SinglyLinkedList();
+
+            const s_node * get_head();
+            const s_node * get_tail();
+
+            bool is_empty();
+            int get_size();
+            s_node *search_node(int val);
+            void insert_node(int val);
+            void delete_node(int val);
+
+        private:
+            s_node *_head;
+            s_node *_tail;
     };
 
 }
