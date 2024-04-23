@@ -5,6 +5,12 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 add_library(
+    linked_lists_lib
+	src/data_structures/linked_lists.hpp
+	src/data_structures/linked_lists.cpp
+	)
+
+add_library(
 	queues_lib
 	src/data_structures/queues.hpp
 	src/data_structures/queues.cpp
