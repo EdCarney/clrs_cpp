@@ -11,6 +11,7 @@ set(Sources
     queues_tests.cpp
     stacks_tests.cpp
     linked_lists_tests.cpp
+    simple_heaps_tests.cpp
     utilities.cpp
 )
 
@@ -25,6 +26,7 @@ target_link_libraries(${This} PUBLIC
     stacks_lib
     queues_lib
     linked_lists_lib
+    simple_heaps_lib
 )
 
 add_test(
