@@ -24,7 +24,6 @@ namespace heaps {
                     delete prev_node->data;
                     delete prev_node;
                 }
-                delete[] e;
             }
         }
     }
@@ -56,8 +55,12 @@ namespace heaps {
 
         if (to_delete->prev != nullptr) {
             to_delete->prev->next = to_delete->next;
+        } else {
+            // update heap pointer if needed
+            _heap_arr[hash_val] = to_delete->next;
         }
 
+        delete to_delete->data;
         delete to_delete;
     }
 
@@ -79,7 +82,7 @@ namespace heaps {
                 return floor(_heap_size * (temp - floor(temp)));
             }
             case heaps::Division: {
-                return key_int % 1567;
+                return key_int % _heap_size;
             }
             default: {
                 throw std::runtime_error("Invalid heap type");
