@@ -5,6 +5,12 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 add_library(
+    simple_heaps_lib
+	src/data_structures/simple_heaps.hpp
+	src/data_structures/simple_heaps.cpp
+	)
+
+add_library(
     linked_lists_lib
 	src/data_structures/linked_lists.hpp
 	src/data_structures/linked_lists.cpp
