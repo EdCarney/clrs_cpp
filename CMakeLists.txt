@@ -64,14 +64,5 @@ add_library(
 	src/sorting_and_ordering/heaps.cpp
 	)
 
-set(LIBRARIES
-    sorting_lib
-    arrays_lib
-    matrices_lib
-    heaps_lib
-    )
-
-target_link_libraries(sorting_lib PUBLIC debug_utilities_lib)
-
 add_subdirectory(googletest)
 add_subdirectory(test)
