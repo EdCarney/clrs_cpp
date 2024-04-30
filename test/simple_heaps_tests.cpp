@@ -2,13 +2,13 @@
 #include <gtest/gtest.h>
 
 TEST(SimpleDivisionHeapTests, InitialValues) {
-    heaps::heap h(heaps::Division, 1567);
+    heaps::simple_heap h(heaps::Division, 1567);
 
     EXPECT_EQ(nullptr, h.search_data(""));
 }
 
 TEST(SimpleDivisionHeapTests, SingleValueAdd) {
-    heaps::heap h(heaps::Division, 1567);
+    heaps::simple_heap h(heaps::Division, 1567);
 
     h.insert_data(new heaps::entry { "test", 5 });
     heaps::entry *data = h.search_data("test");
@@ -18,7 +18,7 @@ TEST(SimpleDivisionHeapTests, SingleValueAdd) {
 }
 
 TEST(SimpleDivisionHeapTests, MultiValueAdd) {
-    heaps::heap h(heaps::Division, 1567);
+    heaps::simple_heap h(heaps::Division, 1567);
 
     h.insert_data(new heaps::entry { "test1", 5 });
     h.insert_data(new heaps::entry { "test2", 6 });
@@ -39,7 +39,7 @@ TEST(SimpleDivisionHeapTests, MultiValueAdd) {
 }
 
 TEST(SimpleDivisionHeapTests, MultiValueAddSameValue) {
-    heaps::heap h(heaps::Division, 1567);
+    heaps::simple_heap h(heaps::Division, 1567);
 
     h.insert_data(new heaps::entry { "test1", 5 });
     h.insert_data(new heaps::entry { "test2", 6 });
@@ -61,7 +61,7 @@ TEST(SimpleDivisionHeapTests, MultiValueAddSameValue) {
 }
 
 TEST(SimpleDivisionHeapTests, SingleValueAddDelete) {
-    heaps::heap h(heaps::Division, 1567);
+    heaps::simple_heap h(heaps::Division, 1567);
 
     h.insert_data(new heaps::entry { "test", 5 });
     heaps::entry *data = h.search_data("test");
@@ -76,19 +76,19 @@ TEST(SimpleDivisionHeapTests, SingleValueAddDelete) {
 }
 
 TEST(SimpleMultiplicationHeapTests, InitialValue) {
-    heaps::heap h(heaps::Multiplication, 16384);
+    heaps::simple_heap h(heaps::Multiplication, 16384);
 
     EXPECT_EQ(nullptr, h.search_data(""));
 }
 
 TEST(SimpleMultiplicationHeapTests, InitialValues) {
-    heaps::heap h(heaps::Multiplication, 16384);
+    heaps::simple_heap h(heaps::Multiplication, 16384);
 
     EXPECT_EQ(nullptr, h.search_data(""));
 }
 
 TEST(SimpleMultiplicationHeapTests, SingleValueAdd) {
-    heaps::heap h(heaps::Multiplication, 16384);
+    heaps::simple_heap h(heaps::Multiplication, 16384);
 
     h.insert_data(new heaps::entry { "test", 5 });
     heaps::entry *data = h.search_data("test");
@@ -98,7 +98,7 @@ TEST(SimpleMultiplicationHeapTests, SingleValueAdd) {
 }
 
 TEST(SimpleMultiplicationHeapTests, MultiValueAdd) {
-    heaps::heap h(heaps::Multiplication, 16384);
+    heaps::simple_heap h(heaps::Multiplication, 16384);
 
     h.insert_data(new heaps::entry { "test1", 5 });
     h.insert_data(new heaps::entry { "test2", 6 });
@@ -119,7 +119,7 @@ TEST(SimpleMultiplicationHeapTests, MultiValueAdd) {
 }
 
 TEST(SimpleMultiplicationHeapTests, MultiValueAddSameValue) {
-    heaps::heap h(heaps::Division, 1567);
+    heaps::simple_heap h(heaps::Division, 1567);
 
     h.insert_data(new heaps::entry { "test1", 5 });
     h.insert_data(new heaps::entry { "test2", 6 });
@@ -141,7 +141,7 @@ TEST(SimpleMultiplicationHeapTests, MultiValueAddSameValue) {
 }
 
 TEST(SimpleMultiplicationHeapTests, SingleValueAddDelete) {
-    heaps::heap h(heaps::Multiplication, 16384);
+    heaps::simple_heap h(heaps::Multiplication, 16384);
 
     h.insert_data(new heaps::entry { "test", 5 });
     heaps::entry *data = h.search_data("test");

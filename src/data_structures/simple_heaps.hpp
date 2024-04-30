@@ -22,10 +22,10 @@ namespace heaps {
         entry *data;
     };
 
-    class heap {
+    class simple_heap {
         public:
-            heap(heapType type, int size);
-            ~heap();
+            simple_heap(heapType type, int size);
+            ~simple_heap();
 
             void insert_data(entry *data);
             void delete_data(entry *data);

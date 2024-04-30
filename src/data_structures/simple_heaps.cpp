@@ -6,7 +6,7 @@
 
 namespace heaps {
 
-    heap::heap(heapType type, int size) : _type(type), _heap_size(size) {
+    simple_heap::simple_heap(heapType type, int size) : _type(type), _heap_size(size) {
         _heap_arr = std::vector<node*>(_heap_size);
 
         for (auto &e : _heap_arr) {
@@ -14,7 +14,7 @@ namespace heaps {
         }
     }
 
-    heap::~heap() {
+    simple_heap::~simple_heap() {
         for (auto &e : _heap_arr) {
             if (e != nullptr) {
                 node *curr_node = e, *prev_node;
@@ -28,7 +28,7 @@ namespace heaps {
         }
     }
 
-    void heap::insert_data(entry *data) {
+    void simple_heap::insert_data(entry *data) {
         int hash_val = get_hash(data->key);
         node *new_node = new node { nullptr, nullptr, data }; 
 
@@ -40,7 +40,7 @@ namespace heaps {
         _heap_arr[hash_val] = new_node;
     }
 
-    void heap::delete_data(entry *data) {
+    void simple_heap::delete_data(entry *data) {
         int hash_val = get_hash(data->key);
         node *to_delete = search_nodes(data->key);
 
@@ -64,12 +64,12 @@ namespace heaps {
         delete to_delete;
     }
 
-    entry *heap::search_data(std::string key) {
+    entry *simple_heap::search_data(std::string key) {
         node *curr_node = search_nodes(key);
         return curr_node == nullptr ? nullptr : curr_node->data;
     }
 
-    int heap::get_hash(std::string key) {
+    int simple_heap::get_hash(std::string key) {
         int key_int = 0;
 
         for (int i = 0; i < key.length(); ++i) {
@@ -90,7 +90,7 @@ namespace heaps {
         }
     }
 
-    node *heap::search_nodes(std::string key) {
+    node *simple_heap::search_nodes(std::string key) {
         int hash_val = get_hash(key);
 
         node *curr_node = _heap_arr[hash_val];
