@@ -6,7 +6,7 @@
 
 namespace heaps {
 
-    enum heapType {
+    enum simple_heap_type {
         Multiplication,
         Division,
     };
@@ -24,7 +24,7 @@ namespace heaps {
 
     class simple_heap {
         public:
-            simple_heap(heapType type, int size);
+            simple_heap(simple_heap_type type, int size);
             ~simple_heap();
 
             void insert_data(entry *data);
@@ -36,10 +36,27 @@ namespace heaps {
 
             std::vector<node*> _heap_arr;
             int _heap_size;
-            heapType _type;
+            simple_heap_type _type;
 
-            int get_hash(std::string key);
-            node *search_nodes(std::string key);
+            int _get_hash(std::string key);
+            node *_search_nodes(std::string key);
+    };
+
+    class open_addressing_heap {
+        public:
+            open_addressing_heap(int size);
+            ~open_addressing_heap();
+
+            void insert_data(entry *data);
+            void delete_data(entry *data);
+            entry *search_data(std::string key);
+
+        private:
+            int _size;
+            std::vector<node*> _heap_arr;
+
+            int _get_hash(std::string key, int permutation);
+            node *_search_nodes(std::string key);
     };
 }
 

@@ -6,7 +6,7 @@
 
 namespace heaps {
 
-    simple_heap::simple_heap(heapType type, int size) : _type(type), _heap_size(size) {
+    simple_heap::simple_heap(simple_heap_type type, int size) : _type(type), _heap_size(size) {
         _heap_arr = std::vector<node*>(_heap_size);
 
         for (auto &e : _heap_arr) {
@@ -29,7 +29,7 @@ namespace heaps {
     }
 
     void simple_heap::insert_data(entry *data) {
-        int hash_val = get_hash(data->key);
+        int hash_val = _get_hash(data->key);
         node *new_node = new node { nullptr, nullptr, data }; 
 
         if (_heap_arr[hash_val] != nullptr) {
@@ -41,8 +41,8 @@ namespace heaps {
     }
 
     void simple_heap::delete_data(entry *data) {
-        int hash_val = get_hash(data->key);
-        node *to_delete = search_nodes(data->key);
+        int hash_val = _get_hash(data->key);
+        node *to_delete = _search_nodes(data->key);
 
         // noop if not found
         if (to_delete == nullptr) {
@@ -65,11 +65,11 @@ namespace heaps {
     }
 
     entry *simple_heap::search_data(std::string key) {
-        node *curr_node = search_nodes(key);
+        node *curr_node = _search_nodes(key);
         return curr_node == nullptr ? nullptr : curr_node->data;
     }
 
-    int simple_heap::get_hash(std::string key) {
+    int simple_heap::_get_hash(std::string key) {
         int key_int = 0;
 
         for (int i = 0; i < key.length(); ++i) {
@@ -90,8 +90,8 @@ namespace heaps {
         }
     }
 
-    node *simple_heap::search_nodes(std::string key) {
-        int hash_val = get_hash(key);
+    node *simple_heap::_search_nodes(std::string key) {
+        int hash_val = _get_hash(key);
 
         node *curr_node = _heap_arr[hash_val];
         while (curr_node != nullptr && curr_node->data->key != key) {
@@ -99,5 +99,43 @@ namespace heaps {
         }
         
         return curr_node;
+    }
+
+    open_addressing_heap::open_addressing_heap(int size) {
+        _size = size;
+        _heap_arr = std::vector<node*>(_size, nullptr);
+    }
+
+    open_addressing_heap::~open_addressing_heap() {
+        int i = -1;
+        while (++i < _size) {
+            if (_heap_arr[i] != nullptr) {
+                delete _heap_arr[i];
+            }
+        }
+    };
+
+    void open_addressing_heap::insert_data(entry *data) {
+        // hash value
+        // while the entry at the hashed value is not null continue
+        // insert at first non-null point
+    }
+
+    void open_addressing_heap::delete_data(entry *data) {
+        // hash key
+        // search for key to find
+        // delete entry and set to nullptr
+    }
+
+    entry open_addressing_heap::*search_data(std::string key) {
+        // hash key
+        // start probing in order with permutations
+        // return either pointer to the entry, or nullptr
+    }
+
+    int open_addressing_heap::_get_hash(std::string key, int permutation) {
+    }
+
+    node *open_addressing_heap::_search_nodes(std::string key) {
     }
 }
