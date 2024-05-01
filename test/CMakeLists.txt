@@ -12,6 +12,7 @@ set(Sources
     stacks_tests.cpp
     linked_lists_tests.cpp
     simple_heaps_tests.cpp
+    prime_numbers_tests.cpp
     utilities.cpp
 )
 
@@ -27,6 +28,7 @@ target_link_libraries(${This} PUBLIC
     queues_lib
     linked_lists_lib
     simple_heaps_lib
+    prime_numbers_lib
 )
 
 add_test(
