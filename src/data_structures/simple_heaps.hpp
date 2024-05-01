@@ -11,6 +11,12 @@ namespace heaps {
         Division,
     };
 
+    enum open_addressing_heap_type {
+        Linear,
+        Quadratic,
+        DoubleHashing,
+    };
+
     struct entry {
         std::string key;
         int val;
@@ -52,9 +58,11 @@ namespace heaps {
             entry *search_data(std::string key);
 
         private:
-            int _size;
-            std::vector<node*> _heap_arr;
+            int _size, _a, _b, _prime;
+            open_addressing_heap_type _type;
+            std::vector<entry*> _heap_arr;
 
+            int _generate_prime();
             int _get_hash(std::string key, int permutation);
             node *_search_nodes(std::string key);
     };
