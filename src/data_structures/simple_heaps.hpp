@@ -51,7 +51,7 @@ namespace heaps {
 
     class open_addressing_heap {
         public:
-            open_addressing_heap(int size);
+            open_addressing_heap(open_addressing_heap_type type, int size);
             ~open_addressing_heap();
 
             void insert_data(entry *data);

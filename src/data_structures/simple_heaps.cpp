@@ -104,7 +104,8 @@ namespace heaps {
         return curr_node;
     }
 
-    open_addressing_heap::open_addressing_heap(int size) {
+    open_addressing_heap::open_addressing_heap(open_addressing_heap_type type, int size) {
+        _type = type;
         _size = size;
         _heap_arr = std::vector<entry*>(_size, nullptr);
 
