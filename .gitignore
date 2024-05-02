@@ -1,6 +1,11 @@
+# various build/debug dirs
 build
+test
 debug
-.cache
-*.swp
+
+# submodules
 googletest
+
+# other files
+*.swp
 .cache
