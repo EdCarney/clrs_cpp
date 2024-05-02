@@ -1,6 +1,5 @@
 # various build/debug dirs
 build
-test
 debug
 
 # submodules

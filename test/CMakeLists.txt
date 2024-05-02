@@ -11,8 +11,9 @@ set(Sources
     queues_tests.cpp
     stacks_tests.cpp
     linked_lists_tests.cpp
-    simple_heaps_tests.cpp
     prime_numbers_tests.cpp
+    simple_heaps_tests.cpp
+    open_addressing_heaps_tests.cpp
     utilities.cpp
 )
 
