@@ -110,7 +110,7 @@ namespace heaps {
 
         _prime = _generate_prime();
         std::random_device rd;
-        std::mt19937 gen(rd);
+        std::mt19937 gen(rd());
         std::uniform_int_distribution<int> a_dist(1, _prime - 1);
         std::uniform_int_distribution<int> b_dist(0, _prime - 1);
 
@@ -129,30 +129,48 @@ namespace heaps {
 
     void open_addressing_heap::insert_data(entry *data) {
         int permutation = -1, hash;
+        entry *e;
         do {
             hash = _get_hash(data->key, ++permutation);
-        } while (_heap_arr[hash] != nullptr && permutation < _size);
+            e = _heap_arr[hash];
+        } while (e != nullptr && e->key != SENTINEL_STR && permutation < _size);
 
         if (permutation == _size) {
             throw std::runtime_error("Heap overflow");
         }
 
-        _heap_arr[hash] = new entry { data->key, data->val };
+        if (e != nullptr) {
+            delete _heap_arr[hash];
+        }
+        _heap_arr[hash] = data;
     }
 
     void open_addressing_heap::delete_data(entry *data) {
-        // hash key
-        // search for key to find
-        // delete entry and set to nullptr
+        int permutation = -1, hash;
+        entry *e;
+        do {
+            hash = _get_hash(data->key, ++permutation);
+            e = _heap_arr[hash];
+        } while (e != nullptr && e->key != data->key && permutation < _size);
+            
+        // check if entry not there
+        if (e == nullptr || permutation == _size) {
+            return;
+        }
+
+        e->key = SENTINEL_STR;
+        e->val = SENTINEL_INT;
     }
 
     entry *open_addressing_heap::search_data(std::string key) {
         int permutation = -1, hash;
+        entry *e;
         do {
             hash = _get_hash(key, ++permutation);
-        } while (_heap_arr[hash] != nullptr && _heap_arr[hash]->key != key && permutation < _size);
+            e = _heap_arr[hash];
+        } while (e != nullptr && e->key != key && permutation < _size);
 
-        if (_heap_arr[hash] == nullptr || permutation == _size) {
+        if (e == nullptr || permutation == _size) {
             return new entry { "", -1 };
         } else {
             return _heap_arr[hash];
@@ -183,8 +201,5 @@ namespace heaps {
             default:
                 return h;
         }
-    }
-
-    node *open_addressing_heap::_search_nodes(std::string key) {
     }
 }

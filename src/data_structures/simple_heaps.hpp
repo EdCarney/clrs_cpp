@@ -58,13 +58,15 @@ namespace heaps {
             entry *search_data(std::string key);
 
         private:
+            const std::string SENTINEL_STR = "";
+            const int SENTINEL_INT = INT_MIN;
+
             int _size, _a, _b, _prime;
             open_addressing_heap_type _type;
             std::vector<entry*> _heap_arr;
 
             int _generate_prime();
             int _get_hash(std::string key, int permutation);
-            node *_search_nodes(std::string key);
     };
 }
 
