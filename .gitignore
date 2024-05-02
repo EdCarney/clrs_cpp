@@ -6,5 +6,6 @@ debug
 googletest
 
 # other files
+*.out
 *.swp
 .cache
