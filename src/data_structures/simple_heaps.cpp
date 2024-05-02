@@ -171,7 +171,7 @@ namespace heaps {
         } while (e != nullptr && e->key != key && permutation < _size);
 
         if (e == nullptr || permutation == _size) {
-            return new entry { "", -1 };
+            return nullptr;
         } else {
             return _heap_arr[hash];
         }
