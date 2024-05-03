@@ -25,7 +25,7 @@ namespace binary_trees {
             node *successor(node *n);
             node *predecessor(node *n);
             void delete_node(node *n);
-            void insert_node(node *n);
+            node *insert_node(int key, std::string data);
             std::vector<node*> get_ordered_nodes();
 
         private:

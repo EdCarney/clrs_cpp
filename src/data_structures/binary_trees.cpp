@@ -60,8 +60,10 @@ namespace binary_trees {
         return p;
     }
 
-    void binary_tree::insert_node(node *n) {
+    node *binary_tree::insert_node(int key, std::string data) {
         node *curr_node = _root, *parent = nullptr;
+        node *n = new node { data, key, nullptr, nullptr, nullptr };
+
         while (nullptr != curr_node) {
             parent = curr_node;
             curr_node = n->key < curr_node->key
@@ -69,20 +71,21 @@ namespace binary_trees {
                       : curr_node->right;
         }
 
-        // check if first node
-        if (nullptr != parent) {
-            _root = n;
-        }
-
         n->parent = parent;
         n->left = nullptr;
         n->right = nullptr;
 
-        if (n->key < parent->key) {
+        // check if first node
+        if (nullptr == parent) {
+            _root = n;
+        } else if (n->key < parent->key) {
             parent->left = n;
         } else {
             parent->right = n;
         }
+
+        ++_size;
+        return n;
     }
 
     void binary_tree::delete_node(node *n) {
@@ -102,6 +105,8 @@ namespace binary_trees {
             swap_node->left = n->left;
             n->left->parent = swap_node;
         }
+
+        --_size;
     }
 
     std::vector<node*> binary_tree::get_ordered_nodes() {
@@ -150,17 +155,18 @@ namespace binary_trees {
         _delete_subtree(n->left);
         _delete_subtree(n->right);
         delete n;
+        --_size;
     }
     
     node *binary_tree::_subtree_max(node *n) {
-        while (nullptr != n->right) {
+        while (nullptr != n && nullptr != n->right) {
             n = n->right;
         }
         return n;
     }
 
     node *binary_tree::_subtree_min(node *n) {
-        while (nullptr != n->left) {
+        while (nullptr != n && nullptr != n->left) {
             n = n->left;
         }
         return n;
