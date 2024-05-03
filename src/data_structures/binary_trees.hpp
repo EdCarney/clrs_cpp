@@ -36,6 +36,10 @@ namespace binary_trees {
             node *_subtree_max(node *n);
             node *_subtree_min(node *n);
             std::vector<node*> _subtree_ordered_nodes(node *n);
+            
+            // updates the parent of remove to point to replace
+            // and updates replace to have remove's parent
+            void _transplant(node *remove, node *replace);
     };
 }
 

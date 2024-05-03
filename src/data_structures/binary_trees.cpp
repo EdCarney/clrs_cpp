@@ -24,7 +24,7 @@ namespace binary_trees {
 
     node *binary_tree::search(int key) {
         node *curr_node = _root;
-        while (curr_node != nullptr && curr_node->key != key) {
+        while (nullptr != curr_node && curr_node->key != key) {
             if (key < curr_node->key) {
                 curr_node = curr_node->left;
             } else {
@@ -35,12 +35,12 @@ namespace binary_trees {
     }
 
     node *binary_tree::successor(node *n) {
-        if (n->right != nullptr) {
+        if (nullptr != n->right) {
             return _subtree_min(n->right);
         }
 
         node *p = n->parent;
-        while (p != nullptr && p->left != n) {
+        while (nullptr != p && p->left != n) {
             p = p->parent;
             n = p;
         }
@@ -48,12 +48,12 @@ namespace binary_trees {
     }
 
     node *binary_tree::predecessor(node *n) {
-        if (n->left != nullptr) {
+        if (nullptr != n->left) {
             return _subtree_max(n->left);
         }
 
         node *p = n->parent;
-        while (p != nullptr && p->right != n) {
+        while (nullptr != p && p->right != n) {
             p = p->parent;
             n = p;
         }
@@ -62,7 +62,7 @@ namespace binary_trees {
 
     void binary_tree::insert_node(node *n) {
         node *curr_node = _root, *parent = nullptr;
-        while (curr_node != nullptr) {
+        while (nullptr != curr_node) {
             parent = curr_node;
             curr_node = n->key < curr_node->key
                       ? curr_node->left
@@ -70,7 +70,7 @@ namespace binary_trees {
         }
 
         // check if first node
-        if (parent == nullptr) {
+        if (nullptr != parent) {
             _root = n;
         }
 
@@ -86,14 +86,45 @@ namespace binary_trees {
     }
 
     void binary_tree::delete_node(node *n) {
+        if (nullptr == n->left) {
+            _transplant(n, n->left);
+        } else if (nullptr == n->right) {
+            _transplant(n, n->right);
+        } else {
+            // get successor
+            node *swap_node = _subtree_min(n->right);
+            if (swap_node != n->right) {
+                _transplant(swap_node, swap_node->right);
+                swap_node->right = n->right;
+                n->right->parent = swap_node;
+            }
+            _transplant(n, swap_node);
+            swap_node->left = n->left;
+            n->left->parent = swap_node;
+        }
     }
 
     std::vector<node*> binary_tree::get_ordered_nodes() {
         return _subtree_ordered_nodes(_root);
     }
 
+    void binary_tree::_transplant(node *remove, node *replace) {
+        if (nullptr == remove->parent) {
+            // check if remove is current root
+            _root = replace;
+        } else if (remove->parent->left == remove) {
+            remove->parent->left = replace;
+        } else {
+            remove->parent->right = replace;
+        }
+        
+        if (nullptr != replace) {
+            replace->parent = remove->parent;
+        }
+    }
+
     std::vector<node*> binary_tree::_subtree_ordered_nodes(node *n) {
-        if (n == nullptr) {
+        if (nullptr == n) {
             return std::vector<node*>(0);
         }
 
@@ -113,7 +144,7 @@ namespace binary_trees {
     }
         
     void binary_tree::_delete_subtree(node *n) {
-        if (n == nullptr) {
+        if (nullptr == n) {
             return;
         }
         _delete_subtree(n->left);
@@ -122,14 +153,14 @@ namespace binary_trees {
     }
     
     node *binary_tree::_subtree_max(node *n) {
-        while (n->right != nullptr) {
+        while (nullptr != n->right) {
             n = n->right;
         }
         return n;
     }
 
     node *binary_tree::_subtree_min(node *n) {
-        while (n->left != nullptr) {
+        while (nullptr != n->left) {
             n = n->left;
         }
         return n;
