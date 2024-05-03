@@ -5,6 +5,12 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 add_library(
+    binary_trees_lib
+	src/data_structures/binary_trees.hpp
+	src/data_structures/binary_trees.cpp
+	)
+
+add_library(
     prime_numbers_lib
 	src/utility_algos/prime_numbers.hpp
 	src/utility_algos/prime_numbers.cpp
