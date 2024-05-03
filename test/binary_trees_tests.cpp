@@ -72,3 +72,93 @@ TEST(BinaryTreesTests, MultiValueInsert) {
         EXPECT_EQ(expected.at(i), ordered.at(i)->key);
     }
 }
+
+TEST(BinaryTreesTests, MultiValueInsertDeleteLeaf) {
+    binary_trees::binary_tree b;
+
+    binary_trees::node *n4 = b.insert_node(4, "test");
+    binary_trees::node *n6 = b.insert_node(6, "test");
+    binary_trees::node *n1 = b.insert_node(1, "test");
+    binary_trees::node *n3 = b.insert_node(3, "test");
+    binary_trees::node *n2 = b.insert_node(2, "test");
+    binary_trees::node *n8 = b.insert_node(8, "test");
+    binary_trees::node *n5 = b.insert_node(5, "test");
+    binary_trees::node *n7 = b.insert_node(7, "test");
+
+    b.delete_node(n2);
+
+    std::vector<binary_trees::node*> ordered = b.get_ordered_nodes();
+    std::vector<int> expected { 1, 3, 4, 5, 6, 7, 8};
+
+    EXPECT_EQ(b.size(), 7);
+    EXPECT_EQ(b.min(), n1);
+    EXPECT_EQ(b.max(), n8);
+    EXPECT_EQ(b.search(2), nullptr);
+    EXPECT_EQ(b.successor(n7), n8);
+    EXPECT_EQ(b.predecessor(n5), n4);
+
+    EXPECT_EQ(ordered.size(), expected.size());
+    for (int i = 0; i < expected.size(); ++i) {
+        EXPECT_EQ(expected.at(i), ordered.at(i)->key);
+    }
+}
+
+TEST(BinaryTreesTests, MultiValueInsertDeleteWithOneChild) {
+    binary_trees::binary_tree b;
+
+    binary_trees::node *n4 = b.insert_node(4, "test");
+    binary_trees::node *n6 = b.insert_node(6, "test");
+    binary_trees::node *n1 = b.insert_node(1, "test");
+    binary_trees::node *n3 = b.insert_node(3, "test");
+    binary_trees::node *n2 = b.insert_node(2, "test");
+    binary_trees::node *n8 = b.insert_node(8, "test");
+    binary_trees::node *n5 = b.insert_node(5, "test");
+    binary_trees::node *n7 = b.insert_node(7, "test");
+
+    b.delete_node(n3);
+
+    std::vector<binary_trees::node*> ordered = b.get_ordered_nodes();
+    std::vector<int> expected { 1, 2, 4, 5, 6, 7, 8 };
+
+    EXPECT_EQ(b.size(), 7);
+    EXPECT_EQ(b.min(), n1);
+    EXPECT_EQ(b.max(), n8);
+    EXPECT_EQ(b.search(3), nullptr);
+    EXPECT_EQ(b.successor(n7), n8);
+    EXPECT_EQ(b.predecessor(n5), n4);
+
+    EXPECT_EQ(ordered.size(), expected.size());
+    for (int i = 0; i < expected.size(); ++i) {
+        EXPECT_EQ(expected.at(i), ordered.at(i)->key);
+    }
+}
+
+TEST(BinaryTreesTests, MultiValueInsertDeleteWithBothChildren) {
+    binary_trees::binary_tree b;
+
+    binary_trees::node *n4 = b.insert_node(4, "test");
+    binary_trees::node *n6 = b.insert_node(6, "test");
+    binary_trees::node *n1 = b.insert_node(1, "test");
+    binary_trees::node *n3 = b.insert_node(3, "test");
+    binary_trees::node *n2 = b.insert_node(2, "test");
+    binary_trees::node *n8 = b.insert_node(8, "test");
+    binary_trees::node *n5 = b.insert_node(5, "test");
+    binary_trees::node *n7 = b.insert_node(7, "test");
+
+    b.delete_node(n8);
+
+    std::vector<binary_trees::node*> ordered = b.get_ordered_nodes();
+    std::vector<int> expected { 1, 2, 3, 4, 5, 6, 7 };
+
+    EXPECT_EQ(b.size(), 7);
+    EXPECT_EQ(b.min(), n1);
+    EXPECT_EQ(b.max(), n7);
+    EXPECT_EQ(b.search(8), nullptr);
+    EXPECT_EQ(b.successor(n7), nullptr);
+    EXPECT_EQ(b.predecessor(n5), n4);
+
+    EXPECT_EQ(ordered.size(), expected.size());
+    for (int i = 0; i < expected.size(); ++i) {
+        EXPECT_EQ(expected.at(i), ordered.at(i)->key);
+    }
+}

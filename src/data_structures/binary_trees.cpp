@@ -41,8 +41,8 @@ namespace binary_trees {
 
         node *p = n->parent;
         while (nullptr != p && p->left != n) {
-            p = p->parent;
             n = p;
+            p = p->parent;
         }
         return p;
     }
@@ -54,8 +54,8 @@ namespace binary_trees {
 
         node *p = n->parent;
         while (nullptr != p && p->right != n) {
-            p = p->parent;
             n = p;
+            p = p->parent;
         }
         return p;
     }
@@ -90,9 +90,9 @@ namespace binary_trees {
 
     void binary_tree::delete_node(node *n) {
         if (nullptr == n->left) {
-            _transplant(n, n->left);
-        } else if (nullptr == n->right) {
             _transplant(n, n->right);
+        } else if (nullptr == n->right) {
+            _transplant(n, n->left);
         } else {
             // get successor
             node *swap_node = _subtree_min(n->right);
