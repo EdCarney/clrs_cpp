@@ -3,9 +3,9 @@ cmake_minimum_required(VERSION 3.23)
 set(This CLRS_CPP_TESTS)
 set(CMAKE_CXX_STANDARD 17)
 set(Sources
-	sorting_tests.cpp
-	arrays_tests.cpp
-	matrices_tests.cpp
+    sorting_tests.cpp
+    arrays_tests.cpp
+    matrices_tests.cpp
     heaps_tests.cpp
     selection_tests.cpp
     queues_tests.cpp
@@ -20,10 +20,10 @@ set(Sources
 
 add_executable(${This} ${Sources})
 target_link_libraries(${This} PUBLIC
-	gtest_main
-	sorting_lib
-	arrays_lib
-	matrices_lib
+    gtest_main
+    sorting_lib
+    arrays_lib
+    matrices_lib
     heaps_lib
     selection_lib
     stacks_lib
@@ -35,6 +35,6 @@ target_link_libraries(${This} PUBLIC
 )
 
 add_test(
-	NAME ${This}
-	COMMAND ${This}
+    NAME ${This}
+    COMMAND ${This}
 )
