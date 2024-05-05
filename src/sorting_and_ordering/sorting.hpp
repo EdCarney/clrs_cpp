@@ -1,5 +1,5 @@
-#ifndef SORTING_HEADER_HPP
-#define SORTING_HEADER_HPP
+#ifndef SORTING_HPP_INCLUDED
+#define SORTING_HPP_INCLUDED
 
 namespace sorting {
 
@@ -20,4 +20,4 @@ namespace sorting {
     void bucket_sort(int arr[], int size);
 }
 
-#endif // SORTING_HEADER_HPP
+#endif // SORTING_HPP_INCLUDED

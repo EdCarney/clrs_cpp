@@ -1,5 +1,5 @@
-#ifndef SELECTION_HEADER_HPP
-#define SELECTION_HEADER_HPP
+#ifndef SELECTION_HPP_INCLUDED
+#define SELECTION_HPP_INCLUDED
 
 #include <vector>
 
@@ -10,4 +10,4 @@ namespace selection {
     int split_select(std::vector<int> vec, int i);
 }
 
-#endif // SELECTION_HEADER_HPP 
+#endif // SELECTION_HPP_INCLUDED 

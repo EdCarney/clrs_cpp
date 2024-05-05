@@ -1,5 +1,5 @@
-#ifndef MATRICES_HEADER_HPP
-#define MATRICES_HEADER_HPP
+#ifndef MATRICES_HPP_INCLUDED
+#define MATRICES_HPP_INCLUDED
 
 #include <vector>
 #include <tuple>
@@ -20,4 +20,4 @@ namespace matrices {
 	matrix_2d operator+(matrix_2d const& A, matrix_2d const& B);
 }
 
-#endif // MATRICES_HEADER_HPP
+#endif // MATRICES_HPP_INCLUDED

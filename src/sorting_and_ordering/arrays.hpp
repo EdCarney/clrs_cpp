@@ -1,5 +1,5 @@
-#ifndef ARRAYS_HEADER_HPP
-#define ARRAYS_HEADER_HPP
+#ifndef ARRAYS_HPP_INCLUDED
+#define ARRAYS_HPP_INCLUDED
 
 #include <tuple>
 
@@ -15,4 +15,4 @@ namespace arrays {
 
 }
 
-#endif // ARRAYS_HEADER_HPP
+#endif // ARRAYS_HPP_INCLUDED

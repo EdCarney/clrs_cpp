@@ -1,5 +1,5 @@
-#ifndef LINKED_LISTS_HEADER_HPP
-#define LINKED_LISTS_HEADER_HPP
+#ifndef LINKED_LISTS_HPP_INCLUDED
+#define LINKED_LISTS_HPP_INCLUDED
 
 namespace linked_lists {
 
@@ -54,4 +54,4 @@ namespace linked_lists {
 
 }
 
-#endif // LINKED_LISTS_HEADER_HPP
+#endif // LINKED_LISTS_HPP_INCLUDED

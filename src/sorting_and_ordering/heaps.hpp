@@ -1,5 +1,5 @@
-#ifndef HEAPS_HEADER_HPP
-#define HEAPS_HEADER_HPP
+#ifndef HEAPS_HPP_INCLUDED
+#define HEAPS_HPP_INCLUDED
 
 #include <vector>
 
@@ -48,4 +48,4 @@ namespace heaps {
     };
 }
 
-#endif // HEAPS_HEADER_HPP
+#endif // HEAPS_HPP_INCLUDED

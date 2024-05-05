@@ -1,5 +1,5 @@
-#ifndef QUEUES_HEADER_HPP
-#define QUEUES_HEADER_HPP
+#ifndef QUEUES_HPP_INCLUDED
+#define QUEUES_HPP_INCLUDED
 
 namespace queues {
     class Queue {
@@ -24,4 +24,4 @@ namespace queues {
     };
 }
 
-#endif // QUEUES_HEADER_HPP
+#endif // QUEUES_HPP_INCLUDED

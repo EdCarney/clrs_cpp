@@ -1,5 +1,5 @@
-#ifndef STACK_HEADER_HPP
-#define STACK_HEADER_HPP
+#ifndef STACK_HPP_INCLUDED
+#define STACK_HPP_INCLUDED
 
 namespace stacks {
 
@@ -23,4 +23,4 @@ namespace stacks {
 
 }
 
-#endif // STACK_HEADER_HPP
+#endif // STACK_HPP_INCLUDED
