@@ -12,6 +12,10 @@ namespace tries {
         _delete_subtree(_root);
     }
 
+    int trie::size() {
+        return _size;
+    }
+
     void trie::insert_value(std::string value) {
         node *curr_node = _root;
         for (char &c : value) {
@@ -20,7 +24,13 @@ namespace tries {
             }
             curr_node = curr_node->children.at(c);
         }
+
+        // handle case where word is already present
+        if (curr_node->is_terminal) {
+            return;
+        }
         curr_node->is_terminal = true;
+        ++_size;
     }
 
     void trie::delete_value(std::string value) {
@@ -42,6 +52,7 @@ namespace tries {
         }
 
         curr_node->is_terminal = false;
+        --_size;
 
         // iterate backwards over the string and delete
         // stop if node has any other children or is terminal

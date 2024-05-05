@@ -16,6 +16,7 @@ namespace tries {
         public:
             trie();
             ~trie();
+            int size();
             void insert_value(std::string value);
             void delete_value(std::string value);
             bool search_value(std::string value);
