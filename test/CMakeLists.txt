@@ -15,6 +15,7 @@ set(Sources
     simple_heaps_tests.cpp
     open_addressing_heaps_tests.cpp
     binary_trees_tests.cpp
+    tries_tests.cpp
     utilities.cpp
 )
 
@@ -32,6 +33,7 @@ target_link_libraries(${This} PUBLIC
     simple_heaps_lib
     prime_numbers_lib
     binary_trees_lib
+    tries_lib
 )
 
 add_test(
