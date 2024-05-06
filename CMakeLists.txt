@@ -5,6 +5,12 @@ set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 add_library(
+    red_black_trees_lib
+    src/data_structures/red_black_trees.hpp
+    src/data_structures/red_black_trees.cpp
+    )
+
+add_library(
     tries_lib
     src/data_structures/tries.hpp
     src/data_structures/tries.cpp
