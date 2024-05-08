@@ -11,6 +11,7 @@ namespace rb_trees {
     };
     
     struct node {
+        int key;
         node *p, *l, *r;
         node_color color;
         std::string data;
@@ -20,7 +21,9 @@ namespace rb_trees {
         public:
             rb_tree();
             ~rb_tree();
-            int get_size();
+            int size();
+            node *min();
+            node *max();
             void insert_node(std::string data);
             void delete_node(std::string data);
             bool search_node(std::string data);
@@ -31,6 +34,8 @@ namespace rb_trees {
             int _size;
             void _r_rotate(node *n);
             void _l_rotate(node *n);
+            node *_tree_min(node *n);
+            node *_tree_max(node *n);
     };
 
 }
