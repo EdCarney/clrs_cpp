@@ -12,7 +12,9 @@ namespace rb_trees {
     
     struct node {
         int key;
-        node *p, *l, *r;
+        node *parent;
+        node *left;
+        node *right;
         node_color color;
         std::string data;
     };        

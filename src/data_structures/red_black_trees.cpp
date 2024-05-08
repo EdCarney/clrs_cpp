@@ -32,23 +32,61 @@ namespace rb_trees {
     }
 
     void rb_tree::_r_rotate(node *n) {
+        node *y = n->left;
+
+        n->left = y->right;
+        y->parent = n->parent;
+
+        if (_NIL_NODE == n->parent) {
+            _root = y;
+        } else if (n->parent->left == n) {
+            n->parent->left = y;
+        } else if (n->parent->right == n) {
+            n->parent->right = y;
+        }
+
+        if (_NIL_NODE != y->right) {
+            y->right->parent = n;
+        }
+
+        y->right = n;
+        n->parent = y;
     }
 
     void rb_tree::_l_rotate(node *n) {
+        node *y = n->right;
+
+        n->right = y->left;
+        y->parent = n->parent;
+
+        if (_NIL_NODE == n->parent) {
+            _root = y;
+        } else if (n->parent->left == n) {
+            n->parent->left = y;
+        } else if (n->parent->right == n) {
+            n->parent->right = y;
+        }
+
+        if (_NIL_NODE != y->left) {
+            y->left->parent = n;
+        }
+
+        y->left = n;
+        n->parent = y;
     }
 
     node *rb_tree::_tree_min(node *n) {
         node *curr_node = n;
-        while (nullptr != curr_node->l) {
-            curr_node = curr_node->l;
+        while (nullptr != curr_node->left) {
+            curr_node = curr_node->left;
         }
         return curr_node;
     }
 
     node *rb_tree::_tree_max(node *n) {
         node *curr_node = n;
-        while (nullptr != curr_node->r) {
-            curr_node = curr_node->r;
+        while (nullptr != curr_node->right) {
+            curr_node = curr_node->right;
         }
         return curr_node;
     }
