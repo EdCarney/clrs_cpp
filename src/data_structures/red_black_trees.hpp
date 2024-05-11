@@ -27,7 +27,7 @@ namespace rb_trees {
             node *min();
             node *max();
             void insert_node(int key, std::string data);
-            void delete_node(std::string data);
+            void delete_node(int key);
             node *search_node(int key);
 
         private:
@@ -38,6 +38,7 @@ namespace rb_trees {
             void _l_rotate(node *n);
             void _insert_fixup(node *n);
             void _delete_fixup(node *n);
+            void _transplant(node *n1, node *n2);
             node *_tree_min(node *n);
             node *_tree_max(node *n);
     };

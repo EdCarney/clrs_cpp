@@ -49,7 +49,64 @@ namespace rb_trees {
         _insert_fixup(n);
     }
 
-    void rb_tree::delete_node(std::string data) {
+    void rb_tree::delete_node(int key) {
+        auto n = search_node(key);
+
+        // check for node not found
+        if (nullptr == n) {
+            return;
+        }
+
+        auto y = n;
+        auto y_orig_color = y->color;
+
+        // used to reference the node that
+        // has been moved
+        node *x;
+
+        // similar to BST deletion
+        if (_NIL_NODE == n->left) {
+            x = n->left;
+            _transplant(n, n->left);
+        } else if (_NIL_NODE == n->right) {
+            x = n->right;
+            _transplant(n, n->right);
+        } else {
+            y = _tree_min(n->right);
+            y_orig_color = y->color;
+            x = y->right;
+
+            // if n's successor is not its
+            // right child, move it there
+            if (y->parent != n) {
+                _transplant(y, y->right);
+                y->right = n->right;
+                y->right->parent = y;
+            }
+            _transplant(n, y);
+            y->left = n->left;
+            y->left->parent = y;
+            y->color = n->color;
+        }
+
+        delete n;
+
+        if (BLACK == y_orig_color) {
+            _delete_fixup(x);
+        }
+    }
+
+    void rb_tree::_transplant(node *n1, node *n2) {
+        // moves n2 into n1's position
+        // does not modify any of n1's links
+        if (_NIL_NODE == n1->parent) {
+            _root = n2;
+        } else if (n1 == n1->parent->left) {
+            n1->parent->left = n2;
+        } else {
+            n1->parent->right = n2;
+        }
+        n2->parent = n1->parent;
     }
 
     node *rb_tree::search_node(int key) {
@@ -163,6 +220,67 @@ namespace rb_trees {
     }
 
     void rb_tree::_delete_fixup(node *n) {
+        while (n != _root && BLACK == n->color) {
+            node *w;
+            if (n->parent->left == n) {
+                w = n->parent->right;
+                
+                if (RED == w->color) {
+                    w->color = BLACK;
+                    n->parent->color = RED;
+                    _l_rotate(n->parent);
+                    w = n->parent->right;
+                }
+
+                if (BLACK == w->left->color && BLACK == w->right->color) {
+                    w->color = RED;
+                    n = n->parent;
+                    continue;
+                }
+
+                if (BLACK == w->right->color) {
+                    w->left->color = BLACK;
+                    w->color = RED;
+                    _r_rotate(w);
+                    w = n->parent->right;
+                }
+
+                w->color = n->parent->color;
+                n->parent->color = BLACK;
+                w->right->color = BLACK;
+                _l_rotate(n->parent);
+                n = _root;
+            } else {
+                w = n->parent->left;
+                
+                if (RED == w->color) {
+                    w->color = BLACK;
+                    n->parent->color = RED;
+                    _r_rotate(n->parent);
+                    w = n->parent->left;
+                }
+
+                if (BLACK == w->right->color && BLACK == w->left->color) {
+                    w->color = RED;
+                    n = n->parent;
+                    continue;
+                }
+
+                if (BLACK == w->left->color) {
+                    w->right->color = BLACK;
+                    w->color = RED;
+                    _l_rotate(w);
+                    w = n->parent->left;
+                }
+
+                w->color = n->parent->color;
+                n->parent->color = BLACK;
+                w->left->color = BLACK;
+                _r_rotate(n->parent);
+                n = _root;
+            }
+        }
+        n->color = BLACK;
     }
 
     node *rb_tree::_tree_min(node *n) {
