@@ -3,7 +3,10 @@
 
 namespace rb_trees {
 
-    rb_tree::rb_tree() : _NIL_NODE (new node { -1, nullptr, nullptr, nullptr, node_color::BLACK, "" }), _root(_NIL_NODE), _size(0) { }
+    rb_tree::rb_tree() : _size(0) {
+        _NIL_NODE = new node { -1, _NIL_NODE, _NIL_NODE, _NIL_NODE, BLACK, "" };
+        _root = _NIL_NODE;
+    }
 
     rb_tree::~rb_tree() {
         // delete all nodes in the tree
@@ -37,7 +40,6 @@ namespace rb_trees {
 
         if (_NIL_NODE == n->parent) {
             _root = n;
-            return;
         } else if (n->key < prev_node->key) {
             prev_node->left = n;
         } else {
@@ -105,7 +107,7 @@ namespace rb_trees {
     }
 
     void rb_tree::_insert_fixup(node *n) {
-        while (RED == n->color) {
+        while (RED == n->parent->color) {
             // n's parent is left child
             if (n->parent == n->parent->parent->left) {
                 // n's uncle

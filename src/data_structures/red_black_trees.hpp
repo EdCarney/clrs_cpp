@@ -31,7 +31,7 @@ namespace rb_trees {
             node *search_node(int key);
 
         private:
-            node * const _NIL_NODE;
+            node * _NIL_NODE;
             node *_root;
             int _size;
             void _r_rotate(node *n);
