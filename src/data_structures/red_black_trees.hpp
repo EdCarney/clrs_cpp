@@ -28,7 +28,7 @@ namespace rb_trees {
             node *max();
             void insert_node(int key, std::string data);
             void delete_node(std::string data);
-            bool search_node(std::string data);
+            node *search_node(int key);
 
         private:
             node * const _NIL_NODE;

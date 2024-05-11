@@ -37,6 +37,7 @@ namespace rb_trees {
 
         if (_NIL_NODE == n->parent) {
             _root = n;
+            return;
         } else if (n->key < prev_node->key) {
             prev_node->left = n;
         } else {
@@ -49,8 +50,14 @@ namespace rb_trees {
     void rb_tree::delete_node(std::string data) {
     }
 
-    bool rb_tree::search_node(std::string data) {
-        return false;
+    node *rb_tree::search_node(int key) {
+        auto curr_node = _root;
+        while (_NIL_NODE != curr_node && key != curr_node->key) {
+            curr_node = key < curr_node->key
+                      ? curr_node->left
+                      : curr_node->right;
+        }
+        return _NIL_NODE == curr_node ? nullptr : curr_node;
     }
 
     void rb_tree::_r_rotate(node *n) {
@@ -157,16 +164,24 @@ namespace rb_trees {
     }
 
     node *rb_tree::_tree_min(node *n) {
+        if (_NIL_NODE == n) {
+            return nullptr;
+        }
+
         node *curr_node = n;
-        while (nullptr != curr_node->left) {
+        while (_NIL_NODE != curr_node->left) {
             curr_node = curr_node->left;
         }
         return curr_node;
     }
 
     node *rb_tree::_tree_max(node *n) {
+        if (_NIL_NODE == n) {
+            return nullptr;
+        }
+
         node *curr_node = n;
-        while (nullptr != curr_node->right) {
+        while (_NIL_NODE != curr_node->right) {
             curr_node = curr_node->right;
         }
         return curr_node;
