@@ -3,8 +3,26 @@
 
 namespace rb_trees {
 
+    node::node(int key, std::string data, node_color color, node *left, node *right, node *parent) {
+        this->key = key;
+        this->data = data;
+        this->color = color;
+        this->left = left;
+        this->right = right;
+        this->parent = parent;
+    }
+
+    node::node(const node &n) {
+        this->key = n.key;
+        this->data = n.data;
+        this->color = n.color;
+        this->left = n.left;
+        this->right = n.right;
+        this->parent = n.parent;
+    }
+
     rb_tree::rb_tree() : _size(0) {
-        _NIL_NODE = new node { -1, nullptr, nullptr, nullptr, BLACK, "" };
+        _NIL_NODE = new node(-1, "", BLACK, nullptr, nullptr, nullptr);
         _NIL_NODE->parent = _NIL_NODE;
         _NIL_NODE->left = _NIL_NODE;
         _NIL_NODE->right = _NIL_NODE;
@@ -28,8 +46,32 @@ namespace rb_trees {
         return _tree_max(_root);
     }
 
+    bool rb_tree::is_valid_rb_tree() {
+        int b_height_l = _get_black_height(_root->left);
+        int b_height_r = _get_black_height(_root->right);
+        return std::min(b_height_l, b_height_r) > 0
+            && b_height_r == b_height_l;
+    }
+
+    // if child black heights are equal, return their height plus 1 if n
+    // is also a black node; otherwise, propagate up -1 as an error value
+    int rb_tree::_get_black_height(node *n) {
+        
+        if (_NIL_NODE == n) {
+            return 1;
+        }
+
+        int b_height_l = _get_black_height(n->left);
+        int b_height_r = _get_black_height(n->right);
+        int is_b_node = BLACK == n->color;
+
+        return b_height_l == b_height_r
+            ? b_height_l + is_b_node
+            : -1;
+    }
+
     void rb_tree::insert_node(int key, std::string data) {
-        auto n = new node { key, _NIL_NODE, _NIL_NODE, _NIL_NODE, RED, data };
+        auto n = new node(key, data, RED, _NIL_NODE, _NIL_NODE, _NIL_NODE);
 
         auto curr_node = _root;
         auto prev_node = _NIL_NODE;
@@ -68,6 +110,7 @@ namespace rb_trees {
         // used to reference the node that
         // has been moved
         node *x;
+        bool delete_x = false;
 
         // similar to BST deletion
         if (_NIL_NODE == n->left) {
@@ -83,7 +126,11 @@ namespace rb_trees {
 
             // if n's successor is not its
             // right child, move it there
-            if (y->parent != n) {
+            if (y->parent == n && _NIL_NODE == x) {
+                x = new node(*_NIL_NODE);
+                x->parent = y;
+                delete_x = true;
+            } else {
                 _transplant(y, y->right);
                 y->right = n->right;
                 y->right->parent = y;
@@ -99,6 +146,10 @@ namespace rb_trees {
 
         if (BLACK == y_orig_color) {
             _delete_fixup(x);
+        }
+
+        if (delete_x) {
+            delete x;
         }
     }
 
@@ -182,6 +233,7 @@ namespace rb_trees {
                 if (RED == y->color) {
                     n->parent->color = BLACK;
                     y->color = BLACK;
+                    n->parent->parent->color = RED;
                     n = n->parent->parent;
                     continue;
                 }
@@ -208,6 +260,7 @@ namespace rb_trees {
                 if (RED == y->color) {
                     n->parent->color = BLACK;
                     y->color = BLACK;
+                    n->parent->parent->color = RED;
                     n = n->parent->parent;
                     continue;
                 }
