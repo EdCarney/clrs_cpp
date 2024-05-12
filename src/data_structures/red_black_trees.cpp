@@ -4,7 +4,11 @@
 namespace rb_trees {
 
     rb_tree::rb_tree() : _size(0) {
-        _NIL_NODE = new node { -1, _NIL_NODE, _NIL_NODE, _NIL_NODE, BLACK, "" };
+        _NIL_NODE = new node { -1, nullptr, nullptr, nullptr, BLACK, "" };
+        _NIL_NODE->parent = _NIL_NODE;
+        _NIL_NODE->left = _NIL_NODE;
+        _NIL_NODE->right = _NIL_NODE;
+
         _root = _NIL_NODE;
     }
 
@@ -46,6 +50,7 @@ namespace rb_trees {
             prev_node->right = n;
         }
 
+        ++_size;
         _insert_fixup(n);
     }
 
@@ -66,11 +71,11 @@ namespace rb_trees {
 
         // similar to BST deletion
         if (_NIL_NODE == n->left) {
-            x = n->left;
-            _transplant(n, n->left);
-        } else if (_NIL_NODE == n->right) {
             x = n->right;
             _transplant(n, n->right);
+        } else if (_NIL_NODE == n->right) {
+            x = n->left;
+            _transplant(n, n->left);
         } else {
             y = _tree_min(n->right);
             y_orig_color = y->color;
@@ -90,6 +95,7 @@ namespace rb_trees {
         }
 
         delete n;
+        --_size;
 
         if (BLACK == y_orig_color) {
             _delete_fixup(x);
