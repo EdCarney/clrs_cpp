@@ -25,12 +25,11 @@ namespace treaps {
         private:
             node *_root;
             int _size;
-            const std::unordered_set<int> _priorities;
+            std::unordered_set<int> _priorities;
             int _generate_pri();
             void _rotate_left(node *n);
             void _rotate_right(node *n);
             void _delete_tree(node *n);
-            void _insert_fixup(node *n);
             void _transplant(node *n1, node *n2);
             node *_subtree_min(node *n);
             node *_subtree_max(node *n);

@@ -90,7 +90,88 @@ namespace treaps {
         while (_priorities.count(pri)) {
             pri = dist(mt);
         }
+        _priorities.insert(pri);
         return pri;
+    }
+
+    void treap::_rotate_left(node *n) {
+        auto y = n->right;
+        y->parent = n->parent;
+
+        if (nullptr == n->parent) {
+            _root = y;
+        } else if (n == n->parent->left) {
+            n->parent->left = y;
+        } else {
+            n->parent->right = y;
+        }
+
+        n->right = y->left;
+        if (nullptr != y->left) {
+            y->left->parent = n;
+        }
+
+        y->left = n;
+        n->parent = y;
+    }
+
+    void treap::_rotate_right(node *n) {
+        auto y = n->left;
+        y->parent = n->parent;
+
+        if (nullptr == n->parent) {
+            _root = y;
+        } else if (n == n->parent->right) {
+            n->parent->right = y;
+        } else {
+            n->parent->left = y;
+        }
+
+        n->left = y->right;
+        if (nullptr != y->right) {
+            y->right->parent = n;
+        }
+
+        y->right = n;
+        n->parent = y;
+    }
+
+    void treap::_delete_tree(node *n) {
+        if (nullptr == n) {
+            return;
+        }
+
+        _delete_tree(n->right);
+        _delete_tree(n->left);
+        delete n;
+    }
+
+    void treap::_transplant(node *n1, node *n2) {
+        n2->parent = n1->parent;
+
+        if (nullptr == n1->parent) {
+            _root = n2;
+        } else if (n1 == n1->parent->left) {
+            n1->parent->left = n2;
+        } else {
+            n1->parent->right = n2;
+        }
+    }
+
+    node *treap::_subtree_min(node *n) {
+        auto curr = n;
+        while (nullptr != curr->left) {
+            curr = curr->left;
+        }
+        return curr;
+    }
+
+    node *treap::_subtree_max(node *n) {
+        auto curr = n;
+        while (nullptr != curr->right) {
+            curr = curr->right;
+        }
+        return curr;
     }
 
     void treap::_fixup(node *n) {
