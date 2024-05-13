@@ -17,7 +17,7 @@ namespace treaps {
 
     void treap::insert_node(int key, std::string data) {
         node *curr = _root, *prev = nullptr;
-        while (nullptr != curr) {
+        while (curr) {
             prev = curr;
             curr = key < curr->key
                  ? curr->left
@@ -27,7 +27,7 @@ namespace treaps {
         int pri = _generate_pri();
         auto n = new node { key, pri, data, prev, nullptr, nullptr };
 
-        if (nullptr == prev) {
+        if (!prev) {
             _root = n;
         } else if (key < prev->key) {
             prev->left = n;
@@ -41,7 +41,7 @@ namespace treaps {
 
     node *treap::search_node(int key) {
         auto curr = _root;
-        while (nullptr != curr && curr->key != key) {
+        while (curr && curr->key != key) {
             curr = key < curr->key
                  ? curr->left
                  : curr->right;
@@ -52,10 +52,10 @@ namespace treaps {
     void treap::delete_node(int key) {
         node *n = search_node(key), *y = nullptr;
 
-        if (nullptr == n->left) {
+        if (!n->left) {
             y = n->right;
             _transplant(n, n->right);
-        } else if (nullptr == n->right) {
+        } else if (!n->right) {
             y = n->left;
             _transplant(n, n->left);
         } else {
@@ -98,7 +98,7 @@ namespace treaps {
         auto y = n->right;
         y->parent = n->parent;
 
-        if (nullptr == n->parent) {
+        if (!n->parent) {
             _root = y;
         } else if (n == n->parent->left) {
             n->parent->left = y;
@@ -107,8 +107,8 @@ namespace treaps {
         }
 
         n->right = y->left;
-        if (nullptr != y->left) {
-            y->left->parent = n;
+        if (auto yl = y->left) {
+            yl->parent = n;
         }
 
         y->left = n;
@@ -119,7 +119,7 @@ namespace treaps {
         auto y = n->left;
         y->parent = n->parent;
 
-        if (nullptr == n->parent) {
+        if (!n->parent) {
             _root = y;
         } else if (n == n->parent->right) {
             n->parent->right = y;
@@ -128,8 +128,8 @@ namespace treaps {
         }
 
         n->left = y->right;
-        if (nullptr != y->right) {
-            y->right->parent = n;
+        if (auto yr = y->right) {
+            yr->parent = n;
         }
 
         y->right = n;
@@ -137,7 +137,7 @@ namespace treaps {
     }
 
     void treap::_delete_tree(node *n) {
-        if (nullptr == n) {
+        if (!n) {
             return;
         }
 
@@ -147,7 +147,7 @@ namespace treaps {
     }
 
     void treap::_transplant(node *n1, node *n2) {
-        if (nullptr == n1->parent) {
+        if (!n1->parent) {
             _root = n2;
         } else if (n1 == n1->parent->left) {
             n1->parent->left = n2;
@@ -155,14 +155,14 @@ namespace treaps {
             n1->parent->right = n2;
         }
 
-        if (nullptr != nullptr) {
+        if (n2) {
             n2->parent = n1->parent;
         }
     }
 
     node *treap::_subtree_min(node *n) {
         auto curr = n;
-        while (nullptr != curr->left) {
+        while (curr->left) {
             curr = curr->left;
         }
         return curr;
@@ -170,14 +170,14 @@ namespace treaps {
 
     node *treap::_subtree_max(node *n) {
         auto curr = n;
-        while (nullptr != curr->right) {
+        while (curr->right) {
             curr = curr->right;
         }
         return curr;
     }
 
     void treap::_fixup(node *n) {
-        while (nullptr != n->parent && n->pri < n->parent->pri) {
+        while (n->parent && n->pri < n->parent->pri) {
             if (n == n->parent->right) {
                 _rotate_left(n->parent);
             } else {
