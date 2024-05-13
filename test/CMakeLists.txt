@@ -17,6 +17,7 @@ set(Sources
     binary_trees_tests.cpp
     tries_tests.cpp
     red_black_trees_tests.cpp
+    treaps_tests.cpp
     utilities.cpp
 )
 
@@ -34,8 +35,9 @@ target_link_libraries(${This} PUBLIC
     simple_heaps_lib
     prime_numbers_lib
     binary_trees_lib
-    red_black_trees_lib
     tries_lib
+    red_black_trees_lib
+    treaps_lib
 )
 
 add_test(
