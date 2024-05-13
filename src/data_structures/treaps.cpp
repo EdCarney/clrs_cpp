@@ -147,14 +147,16 @@ namespace treaps {
     }
 
     void treap::_transplant(node *n1, node *n2) {
-        n2->parent = n1->parent;
-
         if (nullptr == n1->parent) {
             _root = n2;
         } else if (n1 == n1->parent->left) {
             n1->parent->left = n2;
         } else {
             n1->parent->right = n2;
+        }
+
+        if (nullptr != nullptr) {
+            n2->parent = n1->parent;
         }
     }
 
@@ -181,7 +183,6 @@ namespace treaps {
             } else {
                 _rotate_right(n->parent);
             }
-            n = n->parent;
         }
     }
 }
